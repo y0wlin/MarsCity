@@ -1,0 +1,7 @@
+# LF in every checkout (also on Windows with core.autocrlf=true); CRLF only for cmd.exe batch files
+* text=auto eol=lf
+*.cmd text eol=crlf
+*.bin binary
+*.png binary
+*.jpg binary
+*.jpeg binary

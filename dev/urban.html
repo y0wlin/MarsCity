@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Urban plan bench</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 fill=%27%23e0a060%27/%3E%3C/svg%3E" />
+  <style>
+    :root { --bg: #14161a; --fg: #e8e4dc; --dim: #9a958c; --accent: #e0a060; }
+    html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg); font: 12px/1.45 ui-monospace, Menlo, monospace; }
+    #wrap { display: flex; gap: 12px; padding: 12px; box-sizing: border-box; height: 100%; }
+    canvas { background: #000; image-rendering: pixelated; max-height: calc(100vh - 24px); max-width: calc(100vw - 380px); }
+    #side { width: 340px; overflow: auto; }
+    #side h1 { font-size: 13px; margin: 0 0 8px; color: var(--accent); }
+    #side pre { white-space: pre-wrap; word-break: break-all; color: var(--dim); margin: 6px 0; }
+    .row { margin: 4px 0; }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div id="wrap">
+    <canvas id="c" width="768" height="768"></canvas>
+    <div id="side">
+      <h1>urban-fn · 城市与用地规划 bench</h1>
+      <div class="row">modes: <a href="?mode=map&lat=22&lon=118&span=20&view=day">map</a> ·
+        <a href="?mode=map&lat=22&lon=118&span=200&view=night">night</a> ·
+        <a href="?mode=tile&lat=22.05&lon=118.03">tile</a> ·
+        <a href="?mode=occupancy">occupancy GLSL≡JS</a></div>
+      <pre id="info">loading…</pre>
+      <pre id="spec"></pre>
+    </div>
+  </div>
+  <script type="module">
+    import { loadControlMaps } from '../src/data/controlMaps.js';
+    import { latLonToUnit, enuBasis, tileAt, buildingAxes, enuBasisFromUnit } from '../src/core/geo.js';
+    import { R } from '../src/core/constants.js';
+    import { OCCUPANCY_GLSL, windowLitMinute, windowTemp, occBuildingOcc255 } from '../src/world/occupancy.js';
+
+    const q = new URLSearchParams(location.search);
+    const mode = q.get('mode') || 'map';
+    const cv = document.getElementById('c'), ctx = cv.getContext('2d');
+    const info = document.getElementById('info'), specEl = document.getElementById('spec');
+    let resolveDone; const done = new Promise((r) => { resolveDone = r; });
+    const stats = { mode, ms: 0, samples: 0 };
+    window.__MARS__ = { ready: true, waitIdle: async (ms = 120000) => Promise.race([done, new Promise((r) => setTimeout(() => r(false), ms))]), stats: () => stats };
+    const log = (s) => { info.textContent = s; };
+
+    const lin2s = (c) => { c = c <= 0 ? 0 : c >= 1 ? 1 : c; return Math.round((c <= 0.0031308 ? 12.92 * c : 1.055 * Math.pow(c, 1 / 2.4) - 0.055) * 255); };
+    const CLS = { 0: [176, 92, 58], 1: [70, 70, 78], 2: [112, 112, 118], 3: [120, 60, 150], 4: [196, 190, 178], 5: [236, 232, 222], 6: [170, 182, 140], 7: [62, 120, 58], 8: [222, 214, 196], 9: [140, 170, 70], 10: [160, 210, 225], 11: [200, 196, 186], 12: [215, 210, 200], 13: [150, 146, 140], 14: [120, 130, 90], 15: [30, 40, 80], 16: [90, 90, 96], 17: [80, 80, 80], 18: [150, 140, 128], 19: [178, 140, 100], 20: [90, 90, 120], 21: [210, 210, 214], 22: [40, 85, 40], 23: [80, 150, 60] };
+    const USE = { residential: [238, 214, 168], residential_tower: [240, 170, 110], shop_row: [235, 120, 110], clinic: [230, 60, 70], school: [250, 210, 60], market: [240, 140, 40], station: [150, 60, 210], ferry_terminal: [60, 160, 230], research: [110, 190, 200], office: [120, 150, 230], civic_tower: [255, 80, 200], warehouse: [150, 150, 150], port_shed: [100, 120, 140], community: [200, 230, 120], pumphouse: [40, 120, 230], sluice_station: [20, 80, 200], greenhouse: [150, 230, 200], dorm: [230, 200, 150], control_tower: [250, 250, 250], maintenance: [190, 170, 140], cold_storage: [170, 220, 250], farm_station: [210, 160, 90], water_treatment: [60, 200, 220], service_depot: [170, 150, 120], insulated_station: [245, 245, 255], meltwater_pump: [100, 180, 255] };
+
+    async function mapMode(U) {
+      const lat = +(q.get('lat') || 22), lon = +(q.get('lon') || 118), span = +(q.get('span') || 20) * 1000, N = +(q.get('px') || 512), view = q.get('view') || 'day';
+      cv.width = cv.height = N;
+      const img = ctx.createImageData(N, N);
+      const B = enuBasis(lat, lon), c = latLonToUnit(lat, lon, {});
+      const t = span / N, S = {}; let j = 0;
+      const t0 = performance.now();
+      await new Promise((res) => {
+        const step = () => {
+          const f0 = performance.now();
+          while (j < N && performance.now() - f0 < 28) {
+            const nn = (0.5 - (j + 0.5) / N) * span;
+            for (let i = 0; i < N; i++) {
+              const e = ((i + 0.5) / N - 0.5) * span;
+              let x = c.x + (B.east[0] * e + B.north[0] * nn) / R, y = c.y + (B.east[1] * e + B.north[1] * nn) / R, z = c.z + (B.east[2] * e + B.north[2] * nn) / R;
+              const l = Math.hypot(x, y, z); x /= l; y /= l; z /= l;
+              U.urbanSample(x, y, z, t, S);
+              let r, g, b;
+              if (view === 'cls') { const k = S.water > 0.5 && S.cls !== 12 ? [20, 40, 80] : CLS[S.cls] || [255, 0, 255]; [r, g, b] = k; }
+              else if (view === 'night') {
+                const L = 1 - Math.exp(-2.2 * S.light), tt = S.lightTemp;
+                r = lin2s(L * (1 - 0.2 * tt)); g = lin2s(L * (0.62 + 0.28 * tt)); b = lin2s(L * (0.26 + 0.74 * tt));
+                if (S.water > 0.5) { r = 2; g = 4; b = 10; }
+              } else {
+                const f = Math.min(1, S.fabric);
+                let tr = 0.30, tg = 0.12, tb = 0.055;
+                if (S.water > 0.5) { tr = 0.015; tg = 0.05; tb = 0.11; }
+                r = lin2s((tr * (1 - f) + S.fabricR * f) * 1.15); g = lin2s((tg * (1 - f) + S.fabricG * f) * 1.15); b = lin2s((tb * (1 - f) + S.fabricB * f) * 1.15);
+              }
+              const o = 4 * (j * N + i); img.data[o] = r; img.data[o + 1] = g; img.data[o + 2] = b; img.data[o + 3] = 255;
+            }
+            j++;
+          }
+          ctx.putImageData(img, 0, 0);
+          log(`map ${view} ${lat},${lon} span ${span / 1000} km  texel ${t.toFixed(2)} m\nrows ${j}/${N}`);
+          if (j < N) requestAnimationFrame(step); else res();
+        };
+        step();
+      });
+      stats.ms = performance.now() - t0; stats.samples = N * N;
+      const di = U.districtInfo(lat, lon);
+      log(`map ${view} ${lat},${lon} span ${span / 1000} km  texel ${t.toFixed(2)} m\n${(stats.ms * 1000 / stats.samples).toFixed(2)} µs/sample (main thread incl. caches)\ncentre district: ${JSON.stringify(di, null, 1)}`);
+    }
+
+    async function tileMode(U) {
+      const lat = +(q.get('lat') || 22.05), lon = +(q.get('lon') || 118.03);
+      const p = latLonToUnit(lat, lon, {});
+      const tl = tileAt(p.x, p.y, p.z, 13, {});
+      const t0 = performance.now();
+      const d = U.generateCityTile(tl.face, tl.x, tl.y);
+      stats.ms = performance.now() - t0; stats.buildings = d.buildings.length;
+      const N = 900; cv.width = cv.height = N;
+      ctx.fillStyle = '#c4805c'; ctx.fillRect(0, 0, N, N);
+      const M = 700, sc = N / M, X = (x) => N / 2 + x * sc, Z = (z) => N / 2 + z * sc;
+      const fill = (pts, col) => { ctx.beginPath(); pts.forEach(([x, y], k) => (k ? ctx.lineTo(x, y) : ctx.moveTo(x, y))); ctx.closePath(); ctx.fillStyle = col; ctx.fill(); };
+      for (const a of d.areas) fill(a.polygon.map(([x, z]) => [X(x), Z(z)]), a.kind === 'field' ? '#8caa46' : a.kind.includes('park') || a.kind === 'green' ? '#3e7a3a' : a.kind.includes('plaza') ? '#ded6c4' : '#b4b494');
+      for (const k of d.docks) fill(k.polygon.map(([x, z]) => [X(x), Z(z)]), '#d7d2c8');
+      for (const r of d.roads) { ctx.beginPath(); r.points.forEach((pp, k) => (k ? ctx.lineTo(X(pp[0]), Z(pp[2])) : ctx.moveTo(X(pp[0]), Z(pp[2])))); ctx.lineWidth = Math.max(1, r.width * sc); ctx.strokeStyle = r.cls === 'lane' ? '#968c80' : '#4a4a52'; ctx.stroke(); }
+      for (const r of d.rails) { ctx.beginPath(); r.points.forEach((pp, k) => (k ? ctx.lineTo(X(pp[0]), Z(pp[2])) : ctx.moveTo(X(pp[0]), Z(pp[2])))); ctx.lineWidth = Math.max(2, 14 * sc); ctx.strokeStyle = '#783c96'; ctx.stroke(); }
+      const c = latLonToUnit(d.center.lat, d.center.lon, {}), E = enuBasisFromUnit(c.x, c.y, c.z, {});
+      const polys = [];
+      for (const b of d.buildings) {
+        const ax = buildingAxes(b.lat, b.lon, b.heading), P = latLonToUnit(b.lat, b.lon, {});
+        const dx = (P.x - c.x) * R, dy = (P.y - c.y) * R, dz = (P.z - c.z) * R;
+        const cx = dx * E.east[0] + dy * E.east[1] + dz * E.east[2], cz = dx * E.south[0] + dy * E.south[1] + dz * E.south[2];
+        const xe = ax.x[0] * E.east[0] + ax.x[1] * E.east[1] + ax.x[2] * E.east[2], xs = ax.x[0] * E.south[0] + ax.x[1] * E.south[1] + ax.x[2] * E.south[2];
+        const ze = ax.z[0] * E.east[0] + ax.z[1] * E.east[1] + ax.z[2] * E.east[2], zs = ax.z[0] * E.south[0] + ax.z[1] * E.south[1] + ax.z[2] * E.south[2];
+        const L2W = ([x, z]) => [X(cx + x * xe + z * ze), Z(cz + x * xs + z * zs)];
+        const w = b.footprint.w, dd = b.footprint.d;
+        let pts = b.footprint.points || [[-w / 2, -dd / 2], [w / 2, -dd / 2], [w / 2, dd / 2], [-w / 2, dd / 2]];
+        if (b.footprint.shape === 'round') { pts = []; for (let k = 0; k < 24; k++) pts.push([Math.cos(k / 24 * 6.283) * w / 2, Math.sin(k / 24 * 6.283) * w / 2]); }
+        const wp = pts.map(L2W); const col = USE[b.use] || [255, 0, 255];
+        fill(wp, `rgb(${col.join(',')})`); ctx.strokeStyle = '#222'; ctx.lineWidth = 1; ctx.stroke();
+        for (const e of b.entrances) {
+          const ex = e.side === 'front' ? e.offset : e.side === 'back' ? -e.offset : e.side === 'left' ? -w / 2 : w / 2;
+          const ez = e.side === 'front' ? dd / 2 : e.side === 'back' ? -dd / 2 : e.side === 'left' ? -e.offset : e.offset;
+          const [px, py] = L2W([ex, ez]); ctx.fillStyle = e.kind === 'main' ? '#ff2828' : e.kind === 'shop' ? '#ffa000' : e.kind === 'platform' ? '#b400ff' : '#111'; ctx.beginPath(); ctx.arc(px, py, e.kind === 'main' ? 3 : 2, 0, 6.283); ctx.fill();
+        }
+        polys.push({ b, wp });
+      }
+      for (const s of d.stations) { ctx.fillStyle = '#ffff00'; ctx.beginPath(); ctx.arc(X(s.x), Z(s.z), 6, 0, 6.283); ctx.fill(); }
+      const uses = {}; for (const b of d.buildings) uses[b.use] = (uses[b.use] || 0) + 1;
+      log(`tile ${d.key}  ${stats.ms.toFixed(1)} ms\nbuildings ${d.buildings.length} roads ${d.roads.length} areas ${d.areas.length} rails ${d.rails.length} stations ${d.stations.length} docks ${d.docks.length}\n${JSON.stringify(uses)}\nclick a building for its BuildingSpec`);
+      const inside = (pts, x, y) => { let r = false; for (let i = 0, k = pts.length - 1; i < pts.length; k = i++) { const [xi, yi] = pts[i], [xk, yk] = pts[k]; if ((yi > y) !== (yk > y) && x < (xk - xi) * (y - yi) / (yk - yi) + xi) r = !r; } return r; };
+      cv.onclick = (ev) => {
+        const rc = cv.getBoundingClientRect(); const x = (ev.clientX - rc.left) * N / rc.width, y = (ev.clientY - rc.top) * N / rc.height;
+        const hit = polys.find((pp) => inside(pp.wp, x, y));
+        if (hit) { const t1 = performance.now(); const s2 = U.buildingSpecById(hit.b.id); specEl.textContent = `buildingSpecById: ${(performance.now() - t1).toFixed(2)} ms, round-trip ${s2 && s2.id === hit.b.id ? 'OK' : 'FAIL'}\n` + JSON.stringify(hit.b, null, 1); }
+      };
+      if (d.buildings[0]) specEl.textContent = JSON.stringify(d.buildings[0], null, 1);
+    }
+
+    function occupancyMode() {
+      // render windowLitMinute / windowTemp / occupancy byte in GLSL and compare with JS bit for bit
+      const N = 256, gl = document.createElement('canvas').getContext('webgl2');
+      if (!gl) { log('no WebGL2'); stats.ok = false; return; }
+      const vs = `#version 300 es\nin vec2 p; void main(){ gl_Position = vec4(p,0.,1.); }`;
+      const fs = `#version 300 es\nprecision highp float; precision highp int;\nuniform int uMinute; uniform uint uSeed; out vec4 o;\n${OCCUPANCY_GLSL}\nvoid main(){ ivec2 c = ivec2(gl_FragCoord.xy); uint bh = occHash(uSeed, uint(c.y >> 4)); int fl = (c.y & 15) - 1; int bay = c.x; int prof = (c.y >> 4) % 5;\n float L = windowLitMinute(bh, fl, bay, uMinute, prof);\n float r3 = L > 0.0 ? floor((L - 0.55) / 0.03 + 0.5) + 1.0 : 0.0;\n o = vec4(r3 / 255.0, windowTemp(bh, fl, bay), float(occBuildingOcc255(bh, prof)) / 255.0, 1.0); }`;
+      const sh = (t, src) => { const s = gl.createShader(t); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; };
+      const pr = gl.createProgram(); gl.attachShader(pr, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(pr, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(pr);
+      if (!gl.getProgramParameter(pr, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(pr));
+      gl.useProgram(pr);
+      const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+      const loc = gl.getAttribLocation(pr, 'p'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+      const fb = gl.createFramebuffer(), tex = gl.createTexture();
+      gl.bindTexture(gl.TEXTURE_2D, tex); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA8, N, N, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+      gl.bindFramebuffer(gl.FRAMEBUFFER, fb); gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+      gl.viewport(0, 0, N, N);
+      const px = new Uint8Array(N * N * 4);
+      const occH = (a, b) => { let h = Math.imul(a >>> 0, 0x9e3779b1) ^ (b >>> 0); h ^= h >>> 16; h = Math.imul(h, 0x85ebca6b); h ^= h >>> 13; h = Math.imul(h, 0xc2b2ae35); h ^= h >>> 16; return h >>> 0; };
+      let total = 0, bad = 0, lit = 0; const report = [];
+      cv.width = N * 3; cv.height = N; const img = ctx.createImageData(N * 3, N);
+      for (const [seed, minute] of [[12345, 0], [777, 330], [351165, 1100], [99, 1250], [4242, 1410], [8080, 1439], [31337, 600]]) {
+        gl.uniform1i(gl.getUniformLocation(pr, 'uMinute'), minute); gl.uniform1ui(gl.getUniformLocation(pr, 'uSeed'), seed);
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+        gl.readPixels(0, 0, N, N, gl.RGBA, gl.UNSIGNED_BYTE, px);
+        let b0 = 0;
+        for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
+          const bh = occH(seed, y >> 4), fl = (y & 15) - 1, prof = (y >> 4) % 5;
+          const L = windowLitMinute(bh, fl, x, minute, prof);
+          const r3 = L > 0 ? Math.floor((L - 0.55) / 0.03 + 0.5) + 1 : 0;
+          const tq = Math.round(windowTemp(bh, fl, x) * 255), oc = occBuildingOcc255(bh, prof);
+          const o = 4 * (y * N + x);
+          total++; if (L > 0) lit++;
+          if (px[o] !== r3 || Math.abs(px[o + 1] - tq) > 0 || px[o + 2] !== oc) { bad++; b0++; }
+          if (minute === 1250) { const io = 4 * ((N - 1 - y) * N * 3 + x); img.data[io] = px[o] ? 255 : 0; img.data[io + 1] = px[o] ? 190 : 0; img.data[io + 2] = px[o] ? 90 : 10; img.data[io + 3] = 255; const jo = io + 4 * N; img.data[jo] = r3 ? 255 : 0; img.data[jo + 1] = r3 ? 190 : 0; img.data[jo + 2] = r3 ? 90 : 10; img.data[jo + 3] = 255; const ko = jo + 4 * N; const dif = (px[o] !== r3) ? 255 : 0; img.data[ko] = dif; img.data[ko + 1] = 0; img.data[ko + 2] = 0; img.data[ko + 3] = 255; }
+        }
+        report.push(`seed ${seed} minute ${minute}: mismatches ${b0}`);
+      }
+      ctx.putImageData(img, 0, 0);
+      stats.total = total; stats.mismatches = bad; stats.litFraction = lit / total; stats.ok = bad === 0;
+      log(`OCCUPANCY_GLSL vs JS (${total} window samples, ${(100 * lit / total).toFixed(1)} % lit)\n${report.join('\n')}\nTOTAL MISMATCHES: ${bad} → ${bad === 0 ? 'bit-identical ✔' : 'DIFFERENT ✘'}\n\ncanvas: GLSL | JS | diff (minute 1250)`);
+    }
+
+    // Cold buildingSpecById in FRESH workers: the UI lookup worker (src/ui/lookup.worker.js) and the shared
+    // pool worker (src/workers/world.worker.js 'buildingSpec'). Every id gets a brand-new worker, so the
+    // first reply includes module import + every urban cache warming from nothing.
+    async function lookupMode(U) {
+      const sites = [[22.02, 118.03], [10.02, 57.03], [-41.0, 105.0], [8.0, 164.0], [22.0, -15.0], [8.0, 105.0], [-62, 30], [40.5, -60.2]];
+      const ids = [];
+      for (const [la, lo] of sites) {
+        const p = latLonToUnit(la, lo, {}), t = tileAt(p.x, p.y, p.z, 13, {});
+        const d = U.generateCityTile(t.face, t.x, t.y);
+        if (d.buildings.length) ids.push(d.buildings[(d.buildings.length * 0.37) | 0].id, d.buildings[d.buildings.length - 1].id);
+      }
+      const maps = (await import('../src/data/controlMaps.js')).getControlMaps();
+      const rows = [];
+      const call = (w, msg) => new Promise((res) => { w.onmessage = (e) => res(e.data); w.postMessage(msg); });
+      for (const kind of ['ui-lookup', 'pool']) {
+        for (let i = 0; i < ids.length; i += 2) {
+          const w = kind === 'ui-lookup' ? new Worker(new URL('../src/ui/lookup.worker.js', import.meta.url), { type: 'module' })
+            : new Worker(new URL('../src/workers/world.worker.js', import.meta.url), { type: 'module' });
+          if (kind === 'ui-lookup') await call(w, { id: 1, type: 'init', payload: { maps } });
+          else await call(w, { type: '__init', payload: { maps } });
+          const q = (id, n) => (kind === 'ui-lookup' ? { id: n, type: 'spec', payload: { id } } : { id: n, type: 'buildingSpec', payload: { id } });
+          const tg = performance.now(); const r3 = await call(w, q('ZR1-garbage-id-x', 5));       // module import (no plan work)
+          const t0 = performance.now(); const r0 = await call(w, q(ids[i], 2)); const t1 = performance.now();
+          const r1 = await call(w, q(ids[i], 3)); const t2 = performance.now();
+          const r2 = await call(w, q(ids[i + 1], 4)); const t3 = performance.now();
+          rows.push({ kind, id: ids[i], importMs: +(t0 - tg).toFixed(1), ok: !!(r0.result && r0.result.id === ids[i]), coldMs: +(t1 - t0).toFixed(1), warmMs: +(t2 - t1).toFixed(2), sameTileMs: +(t3 - t2).toFixed(1), ok2: !!(r2.result && r2.result.id === ids[i + 1]), garbageNull: r3.result === null });
+          w.terminate();
+          log(`lookup ${kind} ${rows.length}…`);
+        }
+      }
+      const cold = rows.map((r) => r.coldMs).sort((a, b) => a - b);
+      stats.rows = rows; stats.coldMedian = cold[cold.length >> 1]; stats.coldMax = cold[cold.length - 1]; stats.allOk = rows.every((r) => r.ok && r.ok2 && r.garbageNull);
+      log(`buildingSpecById in fresh workers (import = first message incl. module load; cold = first real lookup, empty caches)\n` + rows.map((r) => `${r.kind.padEnd(9)} ${r.id.padEnd(30)} import ${r.importMs} ms  cold ${r.coldMs} ms  warm ${r.warmMs} ms  2nd id ${r.sameTileMs} ms  ${r.ok && r.ok2 ? 'OK' : 'FAIL'}${r.garbageNull ? '' : ' garbage!'}`).join('\n') + `\ncold median ${stats.coldMedian} ms, max ${stats.coldMax} ms, all ok ${stats.allOk}`);
+    }
+
+    // Phase profile of one cold lookup inside a fresh module worker (blob worker importing the dev-server modules).
+    async function profileMode(U) {
+      const sites = [[22.02, 118.03], [10.02, 57.03], [8.0, 164.0], [22.0, -15.0]];
+      const ids = [];
+      for (const [la, lo] of sites) {
+        const p = latLonToUnit(la, lo, {}), t = tileAt(p.x, p.y, p.z, 13, {});
+        const d = U.generateCityTile(t.face, t.x, t.y);
+        if (d.buildings.length) ids.push(d.buildings[(d.buildings.length * 0.37) | 0].id);
+      }
+      const maps = (await import('../src/data/controlMaps.js')).getControlMaps();
+      const src = `
+        const base = ${JSON.stringify(location.origin)};
+        self.onmessage = async (e) => {
+          const { maps, id } = e.data; const T = {}; let t = performance.now();
+          const lap = (k) => { const n = performance.now(); T[k] = +(n - t).toFixed(1); t = n; };
+          const CM = await import(base + '/src/data/controlMaps.js'); CM.installControlMaps(maps);
+          const geo = await import(base + '/src/core/geo.js'); lap('importCore');
+          const F = await import(base + '/src/world/fields.js'); lap('importFields');
+          const TR = await import(base + '/src/world/terrain.js'); lap('importTerrain');
+          const H = await import(base + '/src/world/hydro.js'); lap('importHydro');
+          const U = await import(base + '/src/world/urban.js'); lap('importUrban');
+          const S = await import(base + '/src/world/urban/specs.js'); const DS = await import(base + '/src/world/urban/dseeds.js');
+          const DI = await import(base + '/src/world/urban/districts.js'); const PA = await import(base + '/src/world/urban/parcels.js');
+          const ST = await import(base + '/src/world/urban/settlements.js'); const CO = await import(base + '/src/world/urban/corridors.js');
+          const DC = await import(base + '/src/world/urban/dchunks.js'); const LR = await import(base + '/src/world/urban/lru.js'); lap('importInternals');
+          const p = geo.latLonToUnit(10, 10, {});
+          F.sampleFields(p.x, p.y, p.z, {}); lap('fieldsFirst');
+          TR.heightAt(p.x, p.y, p.z, 0); lap('heightFirst');
+          H.waterAt(p.x, p.y, p.z, {}); lap('waterFirst');
+          let n = 0; for (let i = 0; i < 2000; i++) { const q = geo.latLonToUnit(20 + i * 1e-3, 100, {}); F.sampleFields(q.x, q.y, q.z, {}); } lap('fields2000');
+          for (let i = 0; i < 2000; i++) { const q = geo.latLonToUnit(20 + i * 1e-3, 100, {}); TR.heightAt(q.x, q.y, q.z, 0); } lap('height2000');
+          for (let i = 0; i < 2000; i++) { const q = geo.latLonToUnit(20 + i * 1e-3, 100, {}); H.waterAt(q.x, q.y, q.z, {}); } lap('water2000');
+          const pid = S.parseBuildingId(id);
+          const D0 = DS.dkeyDecode(pid.dkey, {});
+          const c = DS.seedOfKey(pid.dkey, {});
+          ST.townsNear(c.x, c.y, c.z, 34000); lap('townsNear34');
+          DS.districtExists(pid.dkey); lap('exists');
+          const ch = DC.chunkAt(c.x, c.y, c.z); ch.seeds(); lap('chunkSeeds');
+          ST.chunkTowns(ch); lap('chunkTowns');
+          CO.chunkRails(ch); lap('chunkRails');
+          DI.district1(pid.dkey); lap('d1');
+          const G = DI.district2(pid.dkey); lap('d2');
+          const L = PA.blockLayout(G, pid.i, pid.j); lap('layout');
+          const s = U.buildingSpecById(id); lap('specAfter');
+          T.ok = !!s && s.id === id; T.lru = LR.lruStats().filter((r) => r.size > 0).map((r) => r.name + ':' + r.size + '/' + r.misses).join(' ');
+          self.postMessage(T);
+        };`;
+      const url = URL.createObjectURL(new Blob([src], { type: 'text/javascript' }));
+      const rows = [];
+      for (const id of ids) {
+        const w = new Worker(url, { type: 'module' });
+        const T = await new Promise((res) => { w.onmessage = (e) => res(e.data); w.onerror = (e) => res({ error: String(e.message) }); w.postMessage({ maps, id }); });
+        w.terminate(); rows.push({ id, ...T });
+        log(`profile ${rows.length}/${ids.length}`);
+      }
+      stats.rows = rows;
+      log(rows.map((r) => JSON.stringify(r)).join('\n'));
+    }
+
+    (async () => {
+      try {
+        if (mode === 'occupancy') { occupancyMode(); resolveDone(true); return; }
+        log('loading control maps…');
+        await loadControlMaps(new URL('../', location.href).href.replace(location.origin, ''));
+        const U = await import('../src/world/urban.js');
+        if (mode === 'tile') await tileMode(U); else if (mode === 'lookup') await lookupMode(U); else if (mode === 'profile') await profileMode(U); else await mapMode(U);
+        resolveDone(true);
+      } catch (e) { log('ERROR ' + (e.stack || e)); console.error(e); resolveDone(false); }
+    })();
+  </script>
+</body>
+</html>

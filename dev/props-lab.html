@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Props Lab</title>
+  <link rel="icon" href="data:," />
+  <style>
+    html, body { margin: 0; height: 100%; background: #0b0d10; overflow: hidden; font: 12px/1.45 ui-monospace, Menlo, monospace; color: #dfe6ea; }
+    #c { position: fixed; inset: 0; }
+    #hud { position: fixed; left: 10px; top: 10px; background: rgba(10,14,18,.72); padding: 8px 10px; border-radius: 6px; white-space: pre-wrap; pointer-events: none; }
+    body.clean #hud { display: none; }
+  </style>
+</head>
+<body>
+  <div id="c"></div>
+  <div id="hud">loading…</div>
+  <script type="module">
+  // Props lab (owner: props, fix round 2): look-dev of the game-grade pedestrians (humans.js), the
+  // trees and the night light pools without the world. Same materials as the app (lighting patch mocked:
+  // three sun + hemisphere, AgX, exposure 0.45 day / 8 night, emissive × 0.05).
+  // URL: ?view=people|crowd|faces|trees|treeside|bark|night|blossom|atlas|boats  &night=1 &sun=deg &az=deg &cam=x,y,z&tgt=x,y,z &fov=deg &t=sec &clean=1
+  import * as THREE from 'three';
+  import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+  import { PropsMaterials, PROPS_UNIFORMS } from '../src/props/materials.js';
+  import { PropsLibrary } from '../src/props/library.js';
+  import { HUMAN_TYPES } from '../src/props/humans.js';
+  import { SPECIES } from '../src/props/models.js';
+  const Q = new URLSearchParams(location.search);
+  if (Q.get('clean') === '1') document.body.classList.add('clean');
+  const hud = document.getElementById('hud');
+  const view = Q.get('view') || 'people';
+  const night = Q.get('night') === '1' || view === 'night';
+  const renderer = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+  renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.AgXToneMapping;
+  renderer.toneMappingExposure = night ? 8 : 0.45;
+  renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  document.getElementById('c').appendChild(renderer.domElement);
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(+(Q.get('fov') || 35), innerWidth / innerHeight, 0.03, 5000);
+  const controls = new OrbitControls(camera, renderer.domElement);
+  const nightMats = [];
+  const mockApp = { renderer, lighting: { uniforms: { uLpEmissiveScale: { value: 0.05 } }, patch(m, o = {}) { if (m.emissive) { m.userData.benchEmissive = m.emissiveIntensity * 0.05; m.userData.benchNight = !!o.nightEmissive; nightMats.push(m); } return m; } } };
+  const sun = new THREE.DirectionalLight(0xfff4e6, night ? 0 : 7.0);
+  sun.castShadow = true; sun.shadow.mapSize.set(4096, 4096); sun.shadow.bias = -0.0003; sun.shadow.normalBias = 0.02;
+  Object.assign(sun.shadow.camera, { left: -30, right: 30, top: 30, bottom: -30, near: 1, far: 400 });
+  const el = (+(Q.get('sun') || 35)) * Math.PI / 180, az = (+(Q.get('az') || 140)) * Math.PI / 180;
+  sun.position.set(Math.sin(az) * Math.cos(el) * 200, Math.sin(el) * 200, -Math.cos(az) * Math.cos(el) * 200);
+  scene.add(sun, sun.target);
+  // night: the art-directed night ambient of the app (NIGHT_AMBIENT ~0.018,0.026,0.056 irradiance)
+  const hemi = night ? new THREE.HemisphereLight(new THREE.Color(0.026, 0.034, 0.07), new THREE.Color(0.012, 0.012, 0.014), 1.0) : new THREE.HemisphereLight(new THREE.Color(0.32, 0.46, 0.78), new THREE.Color(0.3, 0.2, 0.14), 1.6);
+  scene.add(hemi);
+  scene.background = night ? new THREE.Color(0.002, 0.003, 0.008) : new THREE.Color(0.3, 0.48, 0.85);
+  const ground = new THREE.Mesh(new THREE.PlaneGeometry(400, 400).rotateX(-Math.PI / 2), new THREE.MeshStandardMaterial({ color: 0x9d988f, roughness: 0.92 }));
+  ground.receiveShadow = true; scene.add(ground);
+  const mats = new PropsMaterials(mockApp);
+  const lib = new PropsLibrary(mockApp, mats);
+  lib.build();
+  lib.buildHumans(true);
+  for (const m of nightMats) m.emissiveIntensity = m.userData.benchEmissive * (m.userData.benchNight ? (night ? 1 : 0) : 1);
+  for (const k of Object.keys(mats.m)) if (mats.m[k].userData.uFadeDist) mats.m[k].userData.uFadeDist.value.set(-2, -1, 1e9, 2e9);
+  const m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), s3 = new THREE.Vector3(), p3 = new THREE.Vector3(), Y = new THREE.Vector3(0, 1, 0);
+  const T0 = +(Q.get('t') || 0);
+  // ---- people ----
+  function people(list) {
+    // list: [{type, x, z, yaw, walk:0|1, phase, pose, outfit, skin, hair, face, lod}]
+    const byKey = new Map();
+    for (const p of list) { const k = p.type + ':' + (p.lod || 0); if (!byKey.has(k)) byKey.set(k, []); byKey.get(k).push(p); }
+    for (const [k, arr] of byKey) {
+      const [ti, l] = k.split(':').map(Number);
+      const H = lib.humans[ti];
+      const g = new THREE.BufferGeometry();
+      for (const a of ['position', 'normal', 'uv', 'color', 'aSkin']) g.setAttribute(a, H.lods[l].getAttribute(a));
+      g.setIndex(H.lods[l].getIndex());
+      const n = arr.length;
+      const aW = new Float32Array(n * 2), aP = new Float32Array(n * 4), aL = new Float32Array(n * 4);
+      const mesh = new THREE.InstancedMesh(g, H.material, n);
+      arr.forEach((p, i) => {
+        q.setFromAxisAngle(Y, p.yaw || 0); s3.setScalar(1); p3.set(p.x, 0, p.z); m4.compose(p3, q, s3); mesh.setMatrixAt(i, m4);
+        aW[i * 2] = p.phase || 0; aW[i * 2 + 1] = p.walk ? 1 : 0;
+        aP.set([p.pose || 0, p.va ?? 0.3, p.head || 0, 1], i * 4);
+        const T = HUMAN_TYPES[ti];
+        aL.set([p.outfit ?? T.outfits[i % T.outfits.length], p.skin ?? (i * 3 + ti) % 8, p.hair ?? (ti === 6 ? 5 : (i + ti) % 4), p.face ?? T.face[i & 1]], i * 4);
+      });
+      g.setAttribute('aWalk', new THREE.InstancedBufferAttribute(aW, 2)); g.setAttribute('aPose', new THREE.InstancedBufferAttribute(aP, 4)); g.setAttribute('aLook', new THREE.InstancedBufferAttribute(aL, 4));
+      mesh.castShadow = true; mesh.receiveShadow = true; mesh.frustumCulled = false; mesh.customDepthMaterial = H.depth;
+      scene.add(mesh);
+    }
+  }
+  const NT = HUMAN_TYPES.length;
+  if (view === 'people' || view === 'night' || view === 'faces') {
+    const L = [];
+    for (let ti = 0; ti < NT; ti++) {
+      L.push({ type: ti, x: -9 + ti * 2, z: 0, yaw: 0.25, walk: 1, phase: T0 * 6 + ti * 0.9 });
+      L.push({ type: ti, x: -9 + ti * 2, z: -3, yaw: -0.4, walk: 0, pose: ti % 6, head: 0.2 });
+      L.push({ type: ti, x: -9 + ti * 2, z: -6, yaw: Math.PI - 0.3, walk: 1, phase: 1.6 + ti });
+    }
+    people(L);
+  }
+  if (view === 'crowd') {
+    const L = []; let k = 0;
+    for (let i = 0; i < 70; i++) { const ti = (i * 7) % NT; const d = 4 + (i % 10) * 3.5; const a = (i * 0.61) % 1.2 - 0.6; L.push({ type: ti, x: Math.sin(a) * d, z: -Math.cos(a) * d, yaw: (i * 1.3) % 6.28, walk: i % 3 ? 1 : 0, pose: i % 6, phase: i * 0.7 + T0 * 6, lod: d < 30 ? 0 : 1 }); k++; }
+    people(L);
+  }
+  // ---- ferry (fix round 3: the S05 foreground ferry), broadside, bow towards +x ----
+  if (view === 'boats') {
+    const m4b = new THREE.Matrix4().makeRotationY(Math.PI / 2);
+    for (const [k, geo] of Object.entries(lib.boats.ferry)) {
+      if (!geo || !geo.isBufferGeometry) continue;
+      const m = new THREE.InstancedMesh(geo, mats.get(k), 1); m.setMatrixAt(0, m4b); m.castShadow = true; m.receiveShadow = true; m.frustumCulled = false; scene.add(m);
+    }
+    ground.material.color.setRGB(0.12, 0.3, 0.38);
+  }
+  // ---- leaf atlas flat on screen (fix round 3: blossom cell look-dev) ----
+  if (view === 'atlas') {
+    const q = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.MeshBasicMaterial({ map: mats.tex.leaf, transparent: true, toneMapped: false }));
+    q.frustumCulled = false; q.material.depthTest = false; q.onBeforeRender = () => {};
+    const s2 = new THREE.Scene(); s2.background = new THREE.Color(0.3, 0.48, 0.85); s2.add(q);
+    const oc = new THREE.OrthographicCamera(-innerWidth / innerHeight, innerWidth / innerHeight, 1, -1, 0, 1);
+    renderer.toneMapping = THREE.NoToneMapping;
+    window.__ATLAS__ = { scene: s2, camera: oc };
+  }
+  // ---- trees ----
+  if (view === 'trees' || view === 'treeside' || view === 'bark' || view === 'night' || view === 'blossom') {
+    for (let s = 0; s < SPECIES.length; s++) for (let l = 0; l < 2; l++) {
+      const G = lib.trees[s][l];
+      for (const k of ['bark', 'core', 'leaf']) {
+        const g = new THREE.BufferGeometry(); for (const [a, v] of Object.entries(G[k].attributes)) g.setAttribute(a, v); g.setIndex(G[k].getIndex());
+        g.setAttribute('aFade', new THREE.InstancedBufferAttribute(new Float32Array([1]), 1));
+        const m = new THREE.InstancedMesh(g, mats.get(k), 1);
+        m4.makeTranslation(-25 + s * 10, 0, view === 'night' ? 12 + l * 14 : l * 14); m.setMatrixAt(0, m4); m.setColorAt(0, new THREE.Color(1, 1, 1));
+        m.castShadow = true; m.receiveShadow = true; m.frustumCulled = false; if (k === 'leaf') m.customDepthMaterial = mats.depth.leaf;
+        scene.add(m);
+      }
+    }
+  }
+  const VIEWS = {
+    people: [[-4, 1.6, 5.5], [-4, 1.0, -1]], faces: [[-8.6, 1.62, 1.3], [-8.95, 1.6, 0]], crowd: [[0, 1.65, 3], [0, 1.4, -10]],
+    trees: [[-12, 2, -16], [-12, 5, 0]], treeside: [[-25, 1.65, -9], [-25, 4.5, 0]], bark: [[-25.8, 1.4, -1.6], [-25, 1.3, 0]], night: [[-4, 1.65, 7], [-4, 1.2, -2]],
+    blossom: [[-1, 1.65, -9.5], [-5, 3.4, 0]], atlas: [[0, 0, 1], [0, 0, 0]], boats: [[-60, 20, -340], [0, 5, 0]],
+  };
+  const cam = Q.get('cam'), tgt = Q.get('tgt');
+  const V = VIEWS[view] || VIEWS.people;
+  camera.position.set(...(cam ? cam.split(',').map(Number) : V[0])); controls.target.set(...(tgt ? tgt.split(',').map(Number) : V[1])); controls.update();
+  addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); });
+  let frame = 0;
+  function tick() {
+    frame++; controls.update();
+    PROPS_UNIFORMS.uPropsTime.value = 0;
+    mats.glow.uniforms.uNight.value = night ? 1 : 0; mats.pool.uniforms.uNight.value = night ? 1 : 0;
+    mats.glow.uniforms.uViewH.value = renderer.domElement.height; mats.glow.uniforms.uTanHalf.value = Math.tan(camera.fov * Math.PI / 360);
+    if (window.__ATLAS__) renderer.render(window.__ATLAS__.scene, window.__ATLAS__.camera); else renderer.render(scene, camera);
+    if (frame % 30 === 1) hud.textContent = `props lab view=${view} night=${night}\ncalls ${renderer.info.render.calls} tris ${renderer.info.render.triangles}`;
+    requestAnimationFrame(tick);
+  }
+  tick();
+  window.__MARS__ = { ready: true, async waitIdle() { await new Promise((r) => setTimeout(r, 1500)); return true; }, stats: () => ({ calls: renderer.info.render.calls, tris: renderer.info.render.triangles }), lib, scene, camera };
+  </script>
+</body>
+</html>

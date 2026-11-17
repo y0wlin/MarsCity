@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>UI 测试台｜火星全境</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Ccircle cx=%2732%27 cy=%2732%27 r=%2728%27 fill=%27%23b5532c%27/%3E%3C/svg%3E" />
+  <style>
+    #bench-bg { position: fixed; inset: 0; background: #000 center / cover no-repeat; z-index: 0; }
+    #app { z-index: 1; }
+  </style>
+</head>
+<body>
+  <!-- UI dev bench (OWNER: ui agent). Mounts the real UISystem on a minimal app: a day/night planet
+       drawn from the control maps, mock controls (animated flyTo, back stack, pick), mock city with
+       deterministic synthetic BuildingSpecs, mock worker pool and pipeline.capture. It imports only
+       core/, data/, app/ and ui/ so it keeps working while other modules are mid-edit.
+       URL: ?pose=…&time=…&clean=1&bg=R4-bay (reference image backdrop)&busy=1 (fake loading) -->
+  <div id="bench-bg"></div>
+  <div id="app"></div>
+  <script type="module">
+    import '../src/ui/styles.css';
+    import * as THREE from 'three';
+    import { EventBus } from '../src/app/events.js';
+    import { AppState } from '../src/app/state.js';
+    import { sunDirection } from '../src/app/sun.js';
+    import { findBookmark, allBookmarks } from '../src/app/bookmarks.js';
+    import { loadControlMaps, getControlMaps, provinceAt, zoneAt, densityAt } from '../src/data/controlMaps.js';
+    import { setOrigin, origin } from '../src/core/origin.js';
+    import { latLonHToEcef, ecefToLatLonH, enuBasis, tileBounds, faceToVec, unitToLatLon, tileKey } from '../src/core/geo.js';
+    import { R, DEG, RAD, PROVINCE_CODES, CITY_TILE_LEVEL } from '../src/core/constants.js';
+    import { Rng, hash4, hashTag } from '../src/core/hash.js';
+    import { UISystem } from '../src/ui/index.js';
+
+    const Q = new URLSearchParams(location.search);
+    const bgName = Q.get('bg');
+    if (bgName) document.getElementById('bench-bg').style.backgroundImage = `url(/.refs/${bgName}.jpg)`;
+
+    // ---------------------------------------------------------------- minimal float64 camera rig
+    class Rig {
+      constructor() { this.position = { x: 0, y: 0, z: R * 4 }; this.quaternion = new THREE.Quaternion(); this.fov = 35; this.lens = 50; this.version = 0; this.setPose({ lat: 15, lon: 100, alt: 9.5e6, heading: 0, pitch: -90 }); }
+      get geo() { const p = this.position; return ecefToLatLonH(p.x, p.y, p.z); }
+      setPose({ lat, lon, alt, heading = 0, pitch = -90, roll = 0, lens, fov }) {
+        const p = latLonHToEcef(lat, lon, alt); Object.assign(this.position, { x: p.x, y: p.y, z: p.z });
+        const B = enuBasis(lat, lon);
+        const E = new THREE.Vector3(...B.east), N = new THREE.Vector3(...B.north), U = new THREE.Vector3(...B.up);
+        const h = heading * DEG, pt = pitch * DEG;
+        const horiz = N.clone().multiplyScalar(Math.cos(h)).add(E.clone().multiplyScalar(Math.sin(h)));
+        const f = horiz.clone().multiplyScalar(Math.cos(pt)).addScaledVector(U, Math.sin(pt)).normalize();
+        const u = horiz.clone().multiplyScalar(-Math.sin(pt)).addScaledVector(U, Math.cos(pt)).normalize();
+        if (roll) u.applyAxisAngle(f, -roll * DEG);
+        const r = new THREE.Vector3().crossVectors(f, u).normalize();
+        this.quaternion.setFromRotationMatrix(new THREE.Matrix4().makeBasis(r, u, f.clone().negate()));
+        if (lens) this.lens = lens; else if (fov) { this.lens = null; this.fov = fov; }
+        this._pose = { lat, lon: ((lon + 540) % 360) - 180, alt, heading: ((heading % 360) + 360) % 360, pitch, roll, lens: this.lens, fov: this.fov };
+        this.version++;
+      }
+      getPose() { return { ...this._pose }; }
+      snapshot() { return this.getPose(); }
+      vfov(aspect) { return this.lens ? 2 * Math.atan(18 / this.lens / aspect) * RAD : this.fov; }
+    }
+
+    // ---------------------------------------------------------------- synthetic buildings
+    const USES_Z = ['residential', 'residential', 'residential', 'residential_tower', 'shop_row', 'clinic', 'school', 'market', 'station', 'ferry_terminal', 'research', 'office', 'civic_tower', 'warehouse', 'port_shed', 'community'];
+    const USES_O = ['pumphouse', 'sluice_station', 'greenhouse', 'greenhouse', 'dorm', 'control_tower', 'maintenance', 'cold_storage', 'farm_station', 'water_treatment', 'service_depot', 'insulated_station', 'meltwater_pump'];
+    const ALL = new Map();
+    function syntheticTile(face, x, y) {
+      const key = tileKey(face, CITY_TILE_LEVEL, x, y);
+      const b = tileBounds(face, CITY_TILE_LEVEL, x, y);
+      const c = faceToVec(face, (b.a0 + b.a1) / 2, (b.b0 + b.b1) / 2);
+      const ll = unitToLatLon(c.x, c.y, c.z, {});
+      const zone = zoneAt(ll.lat, ll.lon), pid = provinceAt(ll.lat, ll.lon), code = PROVINCE_CODES[pid];
+      const dens = densityAt(ll.lat, ll.lon);
+      const rng = new Rng(hash4(face, x, y, 77));
+      const n = Math.round((zone === 'Z' ? 70 : 14) * Math.max(0.15, dens));
+      const tag = hashTag(hash4(face, x, y, 3)).slice(-5).toUpperCase();
+      const out = [];
+      for (let i = 0; i < n; i++) {
+        const a = b.a0 + (b.a1 - b.a0) * rng.next(), bb = b.b0 + (b.b1 - b.b0) * rng.next();
+        const p = faceToVec(face, a, bb); const q = unitToLatLon(p.x, p.y, p.z, {});
+        const use = zone === 'Z' ? rng.pick(USES_Z) : rng.pick(USES_O);
+        const tower = use === 'residential_tower' || use === 'civic_tower' || use === 'office';
+        const floors = tower ? rng.int(12, 34) : use === 'greenhouse' || use === 'warehouse' || use === 'port_shed' ? 1 : rng.int(2, 7);
+        const fh = ['station', 'market', 'school', 'clinic', 'civic_tower', 'warehouse', 'port_shed', 'greenhouse', 'pumphouse'].includes(use) ? 4.8 : 3.1;
+        const g = 12 + 30 * rng.next();
+        // same shape as the urban module's IDs: <province>-<district>-<block>-<index>
+        const id = `${code}-${face}.13.${x.toString(36)}.${y.toString(36)}-${(i % 6)}.${Math.floor(i / 6)}-${i}`;
+        const spec = {
+          id, hash: hash4(face, x, y, i), version: 1, province: pid, provinceCode: code, zone, use, tier: tower ? 'tower' : floors > 3 ? 'midrise' : 'lowrise',
+          style: zone === 'Z' ? 'Z-ceramic' : 'O-utility', lat: q.lat, lon: q.lon, heading: rng.pick([0, 90, 180, 270]) + rng.int(-8, 8),
+          ground: { entrance: g, min: g - 0.4, max: g + 0.8 }, footprint: { shape: 'rect', w: rng.float(12, 42), d: rng.float(10, 26) },
+          floors, floorHeight: fh, groundFloorHeight: fh === 3.1 ? 4.2 : fh, basement: rng.bool(0.3) ? 1 : 0,
+          roof: rng.pick(['flat', 'garden', 'pitched', 'vault', 'sawtooth']), plot: { id: `${face}.13.${x.toString(36)}.${y.toString(36)}/${(i % 6)}.${Math.floor(i / 6)}/${i}` }, block: `${face}.13.${x.toString(36)}.${y.toString(36)}/${(i % 6)}.${Math.floor(i / 6)}`, district: `${face}.13.${x.toString(36)}.${y.toString(36)}`,
+          neighbors: {}, sharedWalls: { left: rng.bool(0.3), right: rng.bool(0.3), back: false },
+          entrances: [{ kind: 'main', side: 'front', offset: 0, width: 2.4 }, ...(rng.bool(0.7) ? [{ kind: 'service', side: 'back', offset: rng.float(-4, 4), width: 1.2 }] : []), ...(use === 'shop_row' ? [{ kind: 'shop', side: 'front', offset: 6, width: 3.0 }] : [])],
+          occupancy: +(0.4 + 0.6 * rng.next()).toFixed(3),
+          yearBuilt: rng.int(2190, 2458), meta: { roofKind: rng.pick(['ceramic', 'solar', 'garden', 'metal']) },
+        };
+        ALL.set(id, spec); out.push(spec);
+      }
+      return { key, face, x, y, level: CITY_TILE_LEVEL, buildings: out };
+    }
+
+    // ---------------------------------------------------------------- planet (control maps, day/night)
+    async function makePlanet() {
+      const maps = getControlMaps();
+      const W = 2048, H = 1024;
+      const day = new Uint8Array(W * H * 4), night = new Uint8Array(W * H * 4);
+      for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+        const i = y * W + x, o = (H - 1 - y) * W + x;
+        const water = maps.water.data[i] / 255, dens = maps.density.data[i] / 255, em = maps.emission.data[i] / 255;
+        const zo = maps.zone.data[(y * 2) * 4096 + x * 2] > 127;
+        let r = 168, g = 84, b = 50;
+        if (zo) { r = 118; g = 98; b = 60; }
+        const city = Math.min(1, dens * 1.4);
+        r += (206 - r) * city; g += (204 - g) * city; b += (198 - b) * city;
+        const wv = Math.min(1, Math.max(0, (water - 0.35) * 3));
+        r += (22 - r) * wv; g += (58 - g) * wv; b += (112 - b) * wv;
+        day.set([r, g, b, 255], o * 4);
+        const l = Math.pow(em, 1.6) * (1 - wv);
+        night.set([255 * l, 196 * l, 120 * l, 255], o * 4);
+      }
+      const tex = (d) => { const t = new THREE.DataTexture(d, W, H, THREE.RGBAFormat); t.colorSpace = THREE.SRGBColorSpace; t.wrapS = THREE.RepeatWrapping; t.minFilter = THREE.LinearMipmapLinearFilter; t.magFilter = THREE.LinearFilter; t.generateMipmaps = true; t.anisotropy = 8; t.needsUpdate = true; return t; };
+      const geo = new THREE.SphereGeometry(R, 384, 192);
+      const pos = geo.attributes.position, uv = geo.attributes.uv;
+      for (let i = 0; i < pos.count; i++) uv.setX(i, (Math.atan2(pos.getX(i), pos.getZ(i)) * RAD + 180) / 360);
+      const mat = new THREE.ShaderMaterial({
+        uniforms: { uDay: { value: tex(day) }, uNight: { value: tex(night) }, uSun: { value: new THREE.Vector3(0, 0, 1) } },
+        vertexShader: `varying vec2 vUv; varying vec3 vN; void main(){ vUv = uv; vN = normalize(position); gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
+        fragmentShader: `uniform sampler2D uDay; uniform sampler2D uNight; uniform vec3 uSun; varying vec2 vUv; varying vec3 vN;
+          void main(){ float d = dot(normalize(vN), normalize(uSun)); float lit = smoothstep(-0.06, 0.18, d);
+            vec3 day = texture2D(uDay, vUv).rgb; vec3 nite = texture2D(uNight, vUv).rgb;
+            vec3 warm = mix(vec3(1.0,0.62,0.4), vec3(1.0), smoothstep(0.0, 0.35, d));
+            vec3 c = day * warm * (0.08 + 1.05 * max(d, 0.0)) * lit + nite * 1.6 * (1.0 - lit);
+            gl_FragColor = vec4(c, 1.0);
+            #include <colorspace_fragment>
+          }`,
+      });
+      const mesh = new THREE.Mesh(geo, mat); mesh.frustumCulled = false;
+      return mesh;
+    }
+
+    // ---------------------------------------------------------------- mini app
+    const events = new EventBus();
+    const state = new AppState(events);
+    const rig = new Rig();
+    const app = { events, state, rig, systems: {}, frame: null, fps: 60, frameNo: 0, version: {} };
+    await loadControlMaps('/');
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: false });
+    renderer.setPixelRatio(window.devicePixelRatio || 1);
+    renderer.domElement.id = 'mars-canvas';
+    document.getElementById('app').appendChild(renderer.domElement);
+    if (bgName) renderer.domElement.style.opacity = '0';
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(35, 1, 1, 2e8);
+    const planet = await makePlanet();
+    scene.add(planet);
+    Object.assign(app, { renderer, scene, camera });
+
+    // workers mock (busy=1 keeps fake jobs pending)
+    const workers = {
+      size: 6, stats: { submitted: 0, completed: 0, cancelled: 0, failed: 0 }, _running: 0, fake: Q.get('busy') ? 14 : 0,
+      get pending() { return this._running + this.fake; },
+      submit(type, payload) {
+        this.stats.submitted++; this._running++;
+        const job = { cancelled: false, cancel() { this.cancelled = true; } };
+        job.promise = new Promise((res, rej) => setTimeout(() => {
+          this._running--;
+          if (type === 'cityTile') { this.stats.completed++; res(syntheticTile(payload.face, payload.x, payload.y)); }
+          else { this.stats.failed++; rej(new Error('no handler')); }
+        }, 160));
+        return job;
+      },
+    };
+    app.workers = workers;
+
+    // controls mock: animated flyTo, back stack, drag / wheel / click-pick
+    const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+    const controls = {
+      backStack: [], anim: null,
+      flyTo(pose, { duration = 1.6, pushBack = true } = {}) {
+        if (pushBack) this.backStack.push(rig.getPose());
+        const from = rig.getPose();
+        const to = { heading: 0, pitch: -90, roll: 0, ...pose, lens: pose.lens || from.lens || 50 };
+        let dLon = ((to.lon - from.lon + 540) % 360) - 180, dH = ((to.heading - from.heading + 540) % 360) - 180;
+        return new Promise((resolve) => { this.anim = { from, to, dLon, dH, t0: performance.now(), dur: duration * 1000, resolve }; });
+      },
+      back() { const p = this.backStack.pop(); if (p) { this.anim = null; this.flyTo(p, { pushBack: false, duration: 1.2 }); } },
+      setMode(m) { state.setMode(m); },
+      // building viewpoints like controls.buildingViews / buildingView: names known once the focus data is in
+      _views: new Map(),
+      _viewsFor(s) {
+        if (s.zone === 'O') return ['street', 'entrance', 'living', 'back', 'roof', 'control', 'walkway'];
+        if (/^residential|shop_row/.test(s.use)) return ['street', 'entrance', 'lobby', 'stair', 'living', 'back', 'roof'];
+        return ['street', 'entrance', 'lobby', 'interior', 'back', 'roof'];
+      },
+      buildingViews(id) { return this._views.get(String(id)) || null; },
+      async buildingView(id, name) {
+        const s = ALL.get(id); if (!s) return false;
+        const names = this._viewsFor(s);
+        await new Promise((r) => setTimeout(r, 300));   // "focus data" arrives
+        this._views.set(String(id), names);
+        let used = name;
+        if (!names.includes(name)) used = ({ living: ['interior', 'stair', 'lobby', 'entrance'], lobby: ['entrance'], stair: ['lobby', 'entrance'] }[name] || []).find((n) => names.includes(n));
+        if (!used) return false;
+        const outdoor = used === 'street' || used === 'back' || used === 'roof';
+        await this.flyTo(outdoor ? ui.nav.buildingViewPose(s) : ui.nav.entrancePose(s), { duration: 1.0 });
+        state.setMode(outdoor ? 'orbit' : 'walk');
+        return { arrived: true, view: used, mode: state.mode };
+      },
+      focusBuilding(id) { const s = ALL.get(id); if (!s) return; this._views.set(String(id), this._viewsFor(s)); state.setMode('focus'); return this.flyTo(ui.nav.buildingViewPose(s)); },
+      enterBuilding(id) { const s = ALL.get(id); if (!s) return; this.flyTo(ui.nav.entrancePose(s)).then(() => state.setMode('walk')); return true; },
+      update() {
+        const a = this.anim; if (!a) return;
+        const t = Math.min(1, (performance.now() - a.t0) / a.dur), k = ease(t);
+        const lg = (x, y) => Math.log(x) + (Math.log(y) - Math.log(x)) * k;
+        const peak = Math.min(9e6, Math.max(a.from.alt, a.to.alt, 2.2e6 * (1 - Math.cos(Math.hypot(a.dLon, a.to.lat - a.from.lat) * DEG)) * 6));
+        const altLin = Math.exp(lg(Math.max(2, a.from.alt), Math.max(2, a.to.alt)));
+        const alt = altLin + (peak - Math.max(a.from.alt, a.to.alt)) * Math.sin(Math.PI * k) * 0.5;
+        rig.setPose({ lat: a.from.lat + (a.to.lat - a.from.lat) * k, lon: a.from.lon + a.dLon * k, alt: Math.max(1.6, alt), heading: a.from.heading + a.dH * k, pitch: a.from.pitch + (a.to.pitch - a.from.pitch) * k, lens: a.from.lens + (a.to.lens - a.from.lens) * k });
+        if (t >= 1) { this.anim = null; a.resolve(); events.emit('camera:arrive', {}); }
+      },
+    };
+    app.controls = controls;
+    app.systems.controls = controls;
+    app.systems.terrain = {
+      heightAtLatLon: (lat, lon) => 0,
+      raycast(o, d) {
+        const ox = o.x + origin.x, oy = o.y + origin.y, oz = o.z + origin.z;
+        const b = ox * d.x + oy * d.y + oz * d.z, c = ox * ox + oy * oy + oz * oz - R * R, disc = b * b - c;
+        if (disc < 0) return null; const t = -b - Math.sqrt(disc); if (t < 0) return null;
+        const e = { x: ox + d.x * t, y: oy + d.y * t, z: oz + d.z * t }; const ll = ecefToLatLonH(e.x, e.y, e.z);
+        return { distance: t, ecef: e, lat: ll.lat, lon: ll.lon, h: 0 };
+      },
+      isIdle: () => true,
+    };
+    app.systems.city = { getBuilding: (id) => (ALL.has(id) ? { spec: ALL.get(id) } : null), isIdle: () => true };
+    app.pipeline = { capture: async ({ scale = 1 } = {}) => { render(); return await new Promise((res) => renderer.domElement.toBlob(res, 'image/png')); } };
+    app.isIdle = () => workers.pending === 0;
+    app.applyBookmark = (bm, { instant = true } = {}) => {
+      if (typeof bm === 'string') bm = findBookmark(bm); if (!bm) return false;
+      if (bm.subsolarLat !== undefined) state.subsolarLat = bm.subsolarLat;
+      if (bm.solTime !== undefined) state.setTime(bm.solTime);
+      if (instant) rig.setPose(bm.pose); else controls.flyTo(bm.pose);
+      if (bm.mode) state.setMode(bm.mode);
+      events.emit('goto', { bookmark: bm }); return true;
+    };
+
+    // input: drag rotates the globe, wheel zooms, click picks the ground
+    let drag = null;
+    const cvs = renderer.domElement;
+    cvs.addEventListener('pointerdown', (e) => { drag = { x: e.clientX, y: e.clientY, x0: e.clientX, y0: e.clientY }; controls.anim = null; });
+    window.addEventListener('pointermove', (e) => {
+      if (!drag) return; const dx = e.clientX - drag.x, dy = e.clientY - drag.y; drag.x = e.clientX; drag.y = e.clientY;
+      const p = rig.getPose(); const k = (rig.vfov(camera.aspect) / innerHeight) * Math.min(1, p.alt / R) * 1.2;
+      rig.setPose({ ...p, lat: Math.max(-89, Math.min(89, p.lat + dy * k)), lon: p.lon - dx * k / Math.max(0.2, Math.cos(p.lat * DEG)) });
+    });
+    window.addEventListener('pointerup', (e) => {
+      const d = drag; drag = null; if (!d || Math.hypot(e.clientX - d.x0, e.clientY - d.y0) > 4 || e.target !== cvs) return;
+      const ndc = new THREE.Vector2((e.clientX / innerWidth) * 2 - 1, -(e.clientY / innerHeight) * 2 + 1);
+      const ray = new THREE.Raycaster(); ray.setFromCamera(ndc, camera);
+      const hit = app.systems.terrain.raycast(ray.ray.origin, ray.ray.direction);
+      state.select(hit ? { type: 'location', lat: hit.lat, lon: hit.lon, h: 0, province: provinceAt(hit.lat, hit.lon), zone: zoneAt(hit.lat, hit.lon), distance: hit.distance } : null);
+    });
+    cvs.addEventListener('wheel', (e) => { e.preventDefault(); const p = rig.getPose(); rig.setPose({ ...p, alt: Math.max(2, p.alt * Math.pow(1.0015, e.deltaY)) }); }, { passive: false });
+
+    // ---------------------------------------------------------------- UI
+    const ui = new UISystem(app);
+    app.systems.ui = ui;
+    await ui.init();
+    if (Q.get('clean') === '1') state.set('clean', true);
+    if (Q.get('debug')) state.set('debugLayer', Q.get('debug'));
+    if (Q.get('bookmark')) app.applyBookmark(Q.get('bookmark'));
+    if (Q.get('pose')) { const [lat, lon, alt, heading = 0, pitch = -90, lens] = Q.get('pose').split(',').map(Number); rig.setPose({ lat, lon, alt, heading, pitch, lens: lens || undefined }); }
+    if (Q.get('time')) state.setTime(parseFloat(Q.get('time')));
+    if (Q.get('mode')) state.setMode(Q.get('mode'));
+
+    function resize() { renderer.setSize(innerWidth, innerHeight, false); cvs.style.width = innerWidth + 'px'; cvs.style.height = innerHeight + 'px'; camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); }
+    addEventListener('resize', resize); resize();
+
+    const frame = { sunDir: new THREE.Vector3(), planetCenter: new THREE.Vector3(), camUp: new THREE.Vector3(), frustum: new THREE.Frustum(), projScreen: new THREE.Matrix4(), viewport: { width: 1, height: 1, pixelRatio: 1 } };
+    let last = performance.now(), lastVer = -1;
+    function render() { renderer.render(scene, camera); }
+    function tick() {
+      const now = performance.now(); const dt = Math.min(0.1, (now - last) / 1000); last = now;
+      app.frameNo++; app.fps = app.fps * 0.95 + (dt > 0 ? 1 / dt : 60) * 0.05;
+      if (state.timeSpeed) state.setTime(state.solTime + state.timeSpeed * dt);
+      controls.update();
+      const p = rig.position; setOrigin(p.x, p.y, p.z);
+      camera.quaternion.copy(rig.quaternion); camera.position.set(0, 0, 0);
+      const vf = rig.vfov(camera.aspect); if (Math.abs(camera.fov - vf) > 1e-6) { camera.fov = vf; camera.updateProjectionMatrix(); }
+      const g = ecefToLatLonH(p.x, p.y, p.z);
+      camera.near = Math.max(0.5, g.h * 0.1); camera.far = Math.max(1e5, (g.h + R) * 2.5); camera.updateProjectionMatrix();
+      camera.updateMatrixWorld(true);
+      Object.assign(frame, { app, dt, time: now / 1000, frameNo: app.frameNo, fps: app.fps, solTime: state.solTime, camEcef: origin, camLat: g.lat, camLon: g.lon, camAlt: g.h, camAltGround: g.h, camera, settings: state.settings });
+      sunDirection(state.solTime, state.subsolarLat, frame.sunDir);
+      frame.planetCenter.set(-p.x, -p.y, -p.z);
+      frame.viewport.width = innerWidth; frame.viewport.height = innerHeight; frame.viewport.pixelRatio = renderer.getPixelRatio();
+      frame.projScreen.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
+      frame.frustum.setFromProjectionMatrix(frame.projScreen);
+      frame.moving = rig.version !== lastVer; lastVer = rig.version; frame.rigVersion = rig.version;
+      app.frame = frame;
+      planet.position.set(-p.x, -p.y, -p.z);
+      planet.material.uniforms.uSun.value.copy(frame.sunDir);
+      ui.update(frame);
+      render();
+    }
+    renderer.setAnimationLoop(tick);
+
+    window.__MARS__ = {
+      app, ready: true, bench: true, bookmarks: () => allBookmarks(),
+      goto(t, o) { if (typeof t === 'string' || t.pose) return app.applyBookmark(t, o); rig.setPose(t); return true; },
+      setTime(h) { state.setTime(h); }, set(k, v) { state.set(k, v); }, pose() { return rig.getPose(); },
+      async waitIdle(ms = 30000, settle = 10) { const t0 = performance.now(); let calm = 0; while (performance.now() - t0 < ms) { await new Promise((r) => requestAnimationFrame(r)); calm = app.isIdle() && !controls.anim ? calm + 1 : 0; if (calm >= settle) return true; } return false; },
+      async capture(o) { const b = await app.pipeline.capture(o); return await new Promise((res) => { const fr = new FileReader(); fr.onload = () => res(fr.result); fr.readAsDataURL(b); }); },
+      stats() { const i = renderer.info; return { fps: app.fps, frame: app.frameNo, calls: i.render.calls, triangles: i.render.triangles, geometries: i.memory.geometries, textures: i.memory.textures, workers: { ...workers.stats, pending: workers.pending } }; },
+      synthetic: (lat, lon) => { const n = []; for (const s of ALL.values()) n.push(s); return n.length; },
+      tileAround: async (lat, lon) => { await ui.buildingIndex.ensureAround(lat, lon, 1); return ui.buildingIndex.nearby(lat, lon, { maxDist: 2000 }).map((r) => r.spec.id); },
+    };
+  </script>
+</body>
+</html>

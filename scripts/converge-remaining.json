@@ -1,0 +1,14 @@
+{
+  "note": "Bookmarks still to converge after 2026-11-17 (run: node scripts/converge-batch.mjs --serve --groups scripts/converge-remaining.json --passes 2). Order: S04 first (checks the ice-cliff fix on a heavy view), short dense groups next, S06 (largest, closest to 8 GB VRAM) last. cap = per-shot idle limit in minutes; converged shots finish early. All groups use 4 world + 2 city workers: more workers crashed dense views (V8 heap limit shared by one tab).",
+  "groups": [
+    { "ids": "S04,S04b", "cap": 75 },
+    { "ids": "C01,C02,C03,C04", "cap": 60 },
+    { "ids": "S07,S07b,S07s,S07c,S07d", "cap": 75 },
+    { "ids": "C11", "cap": 60 },
+    { "ids": "C13", "cap": 60 },
+    { "ids": "S09,S09b,S09c,S09d", "cap": 100 },
+    { "ids": "S07O,S07Ob,S07Oc,S07Od,S07Oe", "cap": 90 },
+    { "ids": "S08,S08b,S08c", "cap": 75 },
+    { "ids": "S06,S06b", "cap": 120 }
+  ]
+}

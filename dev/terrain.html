@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Terrain Bench</title>
+  <link rel="icon" href="data:," />
+  <style>
+    html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+    #app { position: fixed; inset: 0; }
+    #hud { position: fixed; left: 10px; top: 10px; color: #dfe6ee; font: 12px/1.45 ui-monospace, Menlo, monospace;
+      background: rgba(8, 12, 18, .6); padding: 8px 10px; border-radius: 6px; white-space: pre; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <div id="hud"></div>
+  <script type="module" src="/src/dev/terrain.js"></script>
+</body>
+</html>

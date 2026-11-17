@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>terrain-fn bench</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Ccircle cx=%278%27 cy=%278%27 r=%277%27 fill=%27%23b5532c%27/%3E%3C/svg%3E" />
+  <style>
+    :root { color-scheme: dark; }
+    body { margin: 0; background: #0b0d10; color: #d8dde3; font: 13px/1.4 system-ui, sans-serif; }
+    header { padding: 10px 14px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    canvas { display: block; margin: 0 14px 14px; image-rendering: pixelated; background: #111; max-width: calc(100vw - 28px); }
+    input, select, button { background: #1a1f26; color: inherit; border: 1px solid #2c333d; border-radius: 4px; padding: 3px 6px; }
+    #info { opacity: 0.8; }
+  </style>
+</head>
+<body>
+  <header>
+    <b>terrain-fn</b>
+    <label>lat <input id="lat" size="7" value="34.4" /></label>
+    <label>lon <input id="lon" size="7" value="-104.6" /></label>
+    <label>extent km <input id="ext" size="6" value="60" /></label>
+    <label>size <select id="size"><option>256</option><option selected>384</option><option>512</option></select></label>
+    <button id="go">render</button>
+    <span id="info"></span>
+  </header>
+  <canvas id="cv" width="384" height="384"></canvas>
+  <script type="module">
+    // Dev bench for the terrain-fn world modules (fields / terrain / hydro / sites) in the browser.
+    // URL: /dev/terrain-fn.html?lat=..&lon=..&ext=..  — renders material tint + hillshade + water.
+    import { loadControlMaps } from '../src/data/controlMaps.js';
+    import { sampleTerrain } from '../src/world/terrain.js';
+    import { SITES } from '../src/world/sites.js';
+    const q = new URLSearchParams(location.search);
+    for (const k of ['lat', 'lon', 'ext']) if (q.get(k)) document.getElementById(k).value = q.get(k);
+    if (q.get('size')) document.getElementById('size').value = q.get('size');
+    const R = 3389500, DEG = Math.PI / 180;
+    const T = {};
+    const SUN = [Math.sin(315 * DEG) * Math.cos(38 * DEG), Math.cos(315 * DEG) * Math.cos(38 * DEG), Math.sin(38 * DEG)];
+    async function render() {
+      const lat = +document.getElementById('lat').value, lon = +document.getElementById('lon').value;
+      const ext = +document.getElementById('ext').value * 1000, N = +document.getElementById('size').value;
+      const cv = document.getElementById('cv'); cv.width = N; cv.height = N;
+      const ctx = cv.getContext('2d'); const img = ctx.createImageData(N, N);
+      const la = lat * DEG, lo = lon * DEG;
+      const c0 = [Math.cos(la) * Math.sin(lo), Math.sin(la), Math.cos(la) * Math.cos(lo)];
+      const E = [Math.cos(lo), 0, -Math.sin(lo)], Nn = [-Math.sin(la) * Math.sin(lo), Math.cos(la), -Math.sin(la) * Math.cos(lo)];
+      const step = ext / N, H = new Float64Array((N + 1) * (N + 1)), Cc = new Float64Array(4 * (N + 1) * (N + 1));
+      const t0 = performance.now();
+      for (let j = 0; j <= N; j++) for (let i = 0; i <= N; i++) {
+        const e = (i + 0.5 - N / 2) * step, n = (N / 2 - j - 0.5) * step;
+        let x = c0[0] + (E[0] * e + Nn[0] * n) / R, y = c0[1] + (Nn[1] * n) / R, z = c0[2] + (E[2] * e + Nn[2] * n) / R;
+        const l = Math.hypot(x, y, z); sampleTerrain(x / l, y / l, z / l, step * 0.5, T);
+        const k = j * (N + 1) + i; H[k] = T.h;
+        let r, g, b;
+        if (T.coast < 0) { const d = -T.h, t1 = Math.min(1, d / 60), t2 = Math.min(1, Math.max(0, (d - 60) / 2500)); r = 46 - 24 * t1 - 12 * t2; g = 150 - 62 * t1 - 58 * t2; b = 170 - 20 * t1 - 65 * t2; Cc[4 * k + 3] = 1; }
+        else {
+          const urb = T.mat === 7;
+          r = T.rock * 158 + T.sand * 198 + T.basalt * 72 + T.soil * (urb ? 205 : 92) + T.ice * 236 + T.beach * 214;
+          g = T.rock * 76 + T.sand * 134 + T.basalt * 62 + T.soil * (urb ? 204 : 116) + T.ice * 241 + T.beach * 190;
+          b = T.rock * 48 + T.sand * 84 + T.basalt * 58 + T.soil * (urb ? 198 : 62) + T.ice * 246 + T.beach * 150;
+          if (T.water >= 2) { r = 30; g = 95; b = 150; }
+        }
+        Cc[4 * k] = r; Cc[4 * k + 1] = g; Cc[4 * k + 2] = b;
+      }
+      const dt = performance.now() - t0;
+      for (let j = 0; j < N; j++) for (let i = 0; i < N; i++) {
+        const k = j * (N + 1) + i, h = H[k];
+        const gx = (H[k + 1] - h) / step * 1.5, gy = (h - H[k + N + 1]) / step * 1.5, nl = Math.hypot(gx, gy, 1);
+        const sh = Cc[4 * k + 3] ? 0.75 + 0.25 * Math.max(0, (-gx * SUN[0] - gy * SUN[1] + SUN[2]) / nl) / SUN[2] : 0.38 + 0.57 * Math.max(0, (-gx * SUN[0] - gy * SUN[1] + SUN[2]) / nl) / SUN[2];
+        const o = (j * N + i) * 4; img.data[o] = Cc[4 * k] * sh; img.data[o + 1] = Cc[4 * k + 1] * sh; img.data[o + 2] = Cc[4 * k + 2] * sh; img.data[o + 3] = 255;
+      }
+      ctx.putImageData(img, 0, 0);
+      document.getElementById('info').textContent = `${((N + 1) ** 2)} sampleTerrain in ${dt.toFixed(0)} ms (${(dt * 1000 / (N + 1) ** 2).toFixed(1)} µs each) · sites: ${SITES.tidalBarrier.name} ${SITES.waterStairs.name}`;
+      window.__TERRAIN_FN__ = { done: true, ms: dt };
+    }
+    await loadControlMaps('/');
+    document.getElementById('go').onclick = render;
+    render();
+  </script>
+</body>
+</html>

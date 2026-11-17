@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Building Kit Bench</title>
+  <link rel="icon" href="data:," />
+  <style>
+    html, body { margin: 0; height: 100%; background: #0b0d10; overflow: hidden; font: 12px/1.45 ui-monospace, Menlo, monospace; color: #dfe6ea; }
+    #c { position: fixed; inset: 0; }
+    #hud { position: fixed; left: 10px; top: 10px; background: rgba(10,14,18,.72); padding: 8px 10px; border-radius: 6px; max-width: 520px; white-space: pre-wrap; pointer-events: none; }
+    #hud b { color: #8fd3ff; font-weight: 600; }
+    body.clean #hud { display: none; }
+  </style>
+</head>
+<body>
+  <div id="c"></div>
+  <div id="hud">loading…</div>
+  <script type="module" src="../src/dev/buildings.js"></script>
+</body>
+</html>

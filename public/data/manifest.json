@@ -1,0 +1,46 @@
+{
+  "zone": {
+    "file": "zone.bin",
+    "width": 4096,
+    "height": 2048,
+    "source": "zone-O.png"
+  },
+  "province": {
+    "file": "province.bin",
+    "width": 2048,
+    "height": 1024,
+    "source": "province-ID.png"
+  },
+  "water": {
+    "file": "water.bin",
+    "width": 2048,
+    "height": 1024,
+    "source": "water.png"
+  },
+  "density": {
+    "file": "density.bin",
+    "width": 2048,
+    "height": 1024,
+    "source": "built-density.png"
+  },
+  "emission": {
+    "file": "emission.bin",
+    "width": 2048,
+    "height": 1024,
+    "source": "emission.png"
+  },
+  "coast": {
+    "file": "coast.bin",
+    "width": 2048,
+    "height": 1024,
+    "format": "MCST header 64 B + float32 LE (signed km to the sea shore, > 0 land)",
+    "key": "mcst1-2048x1024-4c77c280"
+  },
+  "canalNodes": {
+    "file": "canalnodes.bin",
+    "width": 0,
+    "height": 0,
+    "format": "MCNT header 64 B + node bitset (6*N0*N0) + float64 [P, farm] per active node",
+    "count": 53230
+  }
+}
