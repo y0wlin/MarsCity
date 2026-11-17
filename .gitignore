@@ -2,6 +2,10 @@ node_modules
 dist
 .build/
 .DS_Store
-shots/
+shots/*
+!shots/final/
+shots/final/*
+!shots/final/*.png
+!shots/final/report.json
 .refs/
 *.log

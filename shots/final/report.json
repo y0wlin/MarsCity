@@ -1,0 +1,5943 @@
+[
+  {
+    "id": "S01",
+    "name": "01 轨道主视觉｜晨昏线上的城市大陆",
+    "file": "shots/final/S01.png",
+    "idle": true,
+    "ms": 209067,
+    "pose": {
+      "lat": -8.000000000000002,
+      "lon": 124,
+      "alt": 17899999.999999996,
+      "heading": 0,
+      "pitch": -90,
+      "roll": 0,
+      "fov": 35,
+      "lens": 50
+    },
+    "stats": {
+      "fps": 43.525636992831394,
+      "frame": 12239,
+      "calls": 328,
+      "triangles": 2265230,
+      "geometries": 385,
+      "textures": 1050,
+      "programs": 18,
+      "heapMB": 412,
+      "workers": {
+        "submitted": 310,
+        "completed": 309,
+        "cancelled": 1,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "buildingTextures": {
+            "n": 29,
+            "avg": 177,
+            "max": 818,
+            "wait": 5168,
+            "lag": 44
+          },
+          "terrainTile": {
+            "n": 205,
+            "avg": 5818,
+            "max": 14224,
+            "wait": 74415,
+            "lag": 6
+          },
+          "terrainTiles": {
+            "n": 75,
+            "avg": 5920,
+            "max": 15658,
+            "wait": 27914,
+            "lag": 1
+          }
+        }
+      },
+      "city": {
+        "submitted": 0,
+        "completed": 0,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {}
+      },
+      "terrain": {
+        "drawn": 234,
+        "loading": 0,
+        "queued": 0,
+        "upgrading": 0,
+        "buildByTex": {
+          "128": {
+            "n": 310,
+            "avgMs": 1490,
+            "maxMs": 5113,
+            "slowest": "2/3/4/2 U16384 W8",
+            "vertexMs": 87,
+            "texelMs": 1359,
+            "postMs": 44
+          },
+          "256": {
+            "n": 195,
+            "avgMs": 6024,
+            "maxMs": 14224,
+            "slowest": "0/3/5/4 U65536 W6976",
+            "vertexMs": 126,
+            "texelMs": 5721,
+            "postMs": 177
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": true,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "S02",
+    "name": "02 夜半球｜从灯光辨认地形和城市功能",
+    "file": "shots/final/S02.png",
+    "idle": true,
+    "ms": 199017,
+    "pose": {
+      "lat": -5,
+      "lon": 112,
+      "alt": 17900000,
+      "heading": 0,
+      "pitch": -90,
+      "roll": 0,
+      "fov": 35,
+      "lens": 50
+    },
+    "stats": {
+      "fps": 35.6203512273892,
+      "frame": 11374,
+      "calls": 322,
+      "triangles": 2227786,
+      "geometries": 383,
+      "textures": 1083,
+      "programs": 18,
+      "heapMB": 410,
+      "workers": {
+        "submitted": 313,
+        "completed": 310,
+        "cancelled": 3,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "buildingTextures": {
+            "n": 29,
+            "avg": 311,
+            "max": 953,
+            "wait": 10426,
+            "lag": 47
+          },
+          "terrainTile": {
+            "n": 203,
+            "avg": 5221,
+            "max": 13333,
+            "wait": 65800,
+            "lag": 4
+          },
+          "terrainTiles": {
+            "n": 78,
+            "avg": 6051,
+            "max": 14230,
+            "wait": 35021,
+            "lag": 2
+          }
+        }
+      },
+      "city": {
+        "submitted": 0,
+        "completed": 0,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {}
+      },
+      "terrain": {
+        "drawn": 243,
+        "loading": 0,
+        "queued": 0,
+        "upgrading": 0,
+        "buildByTex": {
+          "128": {
+            "n": 322,
+            "avgMs": 1555,
+            "maxMs": 4710,
+            "slowest": "2/3/4/1 U16384 W4254",
+            "vertexMs": 101,
+            "texelMs": 1407,
+            "postMs": 47
+          },
+          "256": {
+            "n": 193,
+            "avgMs": 5342,
+            "maxMs": 13333,
+            "slowest": "1/2/1/3 U65536 W0",
+            "vertexMs": 107,
+            "texelMs": 5083,
+            "postMs": 152
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": true,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "S03",
+    "name": "03 富氧水网｜从流域落到田埂",
+    "file": "shots/final/S03.png",
+    "idle": true,
+    "ms": 905368,
+    "pose": {
+      "lat": 7.17812,
+      "lon": 104.82985,
+      "alt": 3110,
+      "heading": 35,
+      "pitch": -16.000000000000004,
+      "roll": 0,
+      "fov": 35,
+      "lens": 35
+    },
+    "stats": {
+      "fps": 23.24469865243545,
+      "frame": 37777,
+      "calls": 3373,
+      "triangles": 25618778,
+      "geometries": 2235,
+      "textures": 6113,
+      "programs": 38,
+      "heapMB": 918,
+      "workers": {
+        "submitted": 2070,
+        "completed": 1848,
+        "cancelled": 222,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "terrainTile": {
+            "n": 1253,
+            "avg": 1999,
+            "max": 13463,
+            "wait": 330033,
+            "lag": 15
+          },
+          "terrainTiles": {
+            "n": 542,
+            "avg": 1970,
+            "max": 4997,
+            "wait": 74963,
+            "lag": 7
+          },
+          "canals": {
+            "n": 24,
+            "avg": 1,
+            "max": 2,
+            "wait": 544,
+            "lag": 5
+          },
+          "buildingTextures": {
+            "n": 29,
+            "avg": 80,
+            "max": 254,
+            "wait": 61317,
+            "lag": 2
+          }
+        }
+      },
+      "city": {
+        "submitted": 482,
+        "completed": 482,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 481,
+            "avg": 5,
+            "max": 476,
+            "wait": 1528,
+            "lag": 1
+          },
+          "cityBridge": {
+            "n": 1,
+            "avg": 1,
+            "max": 1,
+            "wait": 0,
+            "lag": 0
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 1656,
+        "loading": 0,
+        "queued": 0,
+        "upgrading": 0,
+        "buildByTex": {
+          "64": {
+            "n": 20,
+            "avgMs": 292,
+            "maxMs": 841,
+            "slowest": "0/2/2/2 U4096 W4451",
+            "vertexMs": 39,
+            "texelMs": 239,
+            "postMs": 14
+          },
+          "128": {
+            "n": 2194,
+            "avgMs": 495,
+            "maxMs": 1583,
+            "slowest": "0/9/338/302 U16384 W4582",
+            "vertexMs": 68,
+            "texelMs": 420,
+            "postMs": 7
+          },
+          "256": {
+            "n": 1174,
+            "avgMs": 1875,
+            "maxMs": 3865,
+            "slowest": "0/8/172/155 U65536 W6216",
+            "vertexMs": 89,
+            "texelMs": 1775,
+            "postMs": 12
+          },
+          "512": {
+            "n": 33,
+            "avgMs": 8481,
+            "maxMs": 13463,
+            "slowest": "0/7/89/76 U262144 W10890",
+            "vertexMs": 71,
+            "texelMs": 8372,
+            "postMs": 38
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": true,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "S03b",
+    "name": "03 富氧水网｜定格：温室进水阀与湿格栅",
+    "file": "shots/final/S03b.png",
+    "idle": true,
+    "ms": 1639161,
+    "pose": {
+      "lat": 7.2096987000000015,
+      "lon": 104.86233850000002,
+      "alt": 118.87999999942258,
+      "heading": 155,
+      "pitch": -9.00000000000001,
+      "roll": 0,
+      "fov": 35,
+      "lens": 28
+    },
+    "stats": {
+      "fps": 16.7943599067873,
+      "frame": 74801,
+      "calls": 6063,
+      "triangles": 53627518,
+      "geometries": 3797,
+      "textures": 10421,
+      "programs": 83,
+      "heapMB": 1530,
+      "workers": {
+        "submitted": 4931,
+        "completed": 4536,
+        "cancelled": 395,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "terrainTile": {
+            "n": 3183,
+            "avg": 2183,
+            "max": 13463,
+            "wait": 449402,
+            "lag": 38
+          },
+          "terrainTiles": {
+            "n": 1262,
+            "avg": 2377,
+            "max": 5217,
+            "wait": 94782,
+            "lag": 29
+          },
+          "canals": {
+            "n": 62,
+            "avg": 1,
+            "max": 2,
+            "wait": 582,
+            "lag": 14
+          },
+          "buildingTextures": {
+            "n": 29,
+            "avg": 80,
+            "max": 254,
+            "wait": 61317,
+            "lag": 2
+          }
+        }
+      },
+      "city": {
+        "submitted": 1096,
+        "completed": 1095,
+        "cancelled": 1,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 996,
+            "avg": 10,
+            "max": 476,
+            "wait": 4404,
+            "lag": 5
+          },
+          "cityBridge": {
+            "n": 2,
+            "avg": 3,
+            "max": 4,
+            "wait": 6,
+            "lag": 0
+          },
+          "cityBuilding": {
+            "n": 74,
+            "avg": 34,
+            "max": 235,
+            "wait": 948,
+            "lag": 39
+          },
+          "cityStreets": {
+            "n": 23,
+            "avg": 62,
+            "max": 340,
+            "wait": 1085,
+            "lag": 9
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 2424,
+        "loading": 0,
+        "queued": 0,
+        "upgrading": 0,
+        "buildByTex": {
+          "64": {
+            "n": 32,
+            "avgMs": 301,
+            "maxMs": 841,
+            "slowest": "0/2/2/2 U4096 W4451",
+            "vertexMs": 56,
+            "texelMs": 235,
+            "postMs": 10
+          },
+          "128": {
+            "n": 5095,
+            "avgMs": 596,
+            "maxMs": 1583,
+            "slowest": "0/9/338/302 U16384 W4582",
+            "vertexMs": 88,
+            "texelMs": 501,
+            "postMs": 7
+          },
+          "256": {
+            "n": 3019,
+            "avgMs": 2061,
+            "maxMs": 4627,
+            "slowest": "0/10/710/560 U65536 W5803",
+            "vertexMs": 102,
+            "texelMs": 1946,
+            "postMs": 14
+          },
+          "512": {
+            "n": 84,
+            "avgMs": 8130,
+            "maxMs": 13463,
+            "slowest": "0/7/89/76 U262144 W10890",
+            "vertexMs": 102,
+            "texelMs": 7993,
+            "postMs": 36
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": true,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "S04",
+    "name": "04 冰缘省域｜工务设施如何适应高纬",
+    "file": "shots/final/S04.png",
+    "idle": true,
+    "ms": 2390821,
+    "pose": {
+      "lat": 73.61413,
+      "lon": 53.32391,
+      "alt": 445.00000000046566,
+      "heading": 9,
+      "pitch": 1.4999999999999967,
+      "roll": 0,
+      "fov": 35,
+      "lens": 55
+    },
+    "stats": {
+      "fps": 10.142352027248961,
+      "frame": 30702,
+      "calls": 16151,
+      "triangles": 145935201,
+      "geometries": 9170,
+      "textures": 19629,
+      "programs": 84,
+      "heapMB": 1868,
+      "workers": {
+        "submitted": 7961,
+        "completed": 7601,
+        "cancelled": 360,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "terrainTile": {
+            "n": 5351,
+            "avg": 1029,
+            "max": 8139,
+            "wait": 971671,
+            "lag": 168
+          },
+          "canals": {
+            "n": 3,
+            "avg": 1,
+            "max": 2,
+            "wait": 961,
+            "lag": 44
+          },
+          "terrainTiles": {
+            "n": 2218,
+            "avg": 1329,
+            "max": 4832,
+            "wait": 275994,
+            "lag": 63
+          },
+          "buildingTextures": {
+            "n": 29,
+            "avg": 99,
+            "max": 357,
+            "wait": 425582,
+            "lag": 68
+          }
+        }
+      },
+      "city": {
+        "submitted": 445,
+        "completed": 445,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 379,
+            "avg": 5,
+            "max": 672,
+            "wait": 3702,
+            "lag": 1
+          },
+          "cityBuilding": {
+            "n": 42,
+            "avg": 59,
+            "max": 261,
+            "wait": 717,
+            "lag": 8
+          },
+          "cityStreets": {
+            "n": 24,
+            "avg": 62,
+            "max": 354,
+            "wait": 987,
+            "lag": 1
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 6711,
+        "loading": 0,
+        "queued": 0,
+        "upgrading": 0,
+        "buildByTex": {
+          "64": {
+            "n": 56,
+            "avgMs": 286,
+            "maxMs": 724,
+            "slowest": "2/4/11/6 U4096 W0",
+            "vertexMs": 73,
+            "texelMs": 199,
+            "postMs": 13
+          },
+          "128": {
+            "n": 8917,
+            "avgMs": 333,
+            "maxMs": 1504,
+            "slowest": "2/16/42431/25517 U17525 W17080",
+            "vertexMs": 52,
+            "texelMs": 278,
+            "postMs": 4
+          },
+          "256": {
+            "n": 5086,
+            "avgMs": 951,
+            "maxMs": 2703,
+            "slowest": "2/19/339436/204134 U66564 W69761",
+            "vertexMs": 36,
+            "texelMs": 907,
+            "postMs": 7
+          },
+          "512": {
+            "n": 164,
+            "avgMs": 3828,
+            "maxMs": 8139,
+            "slowest": "2/16/42426/25521 U264196 W266369",
+            "vertexMs": 44,
+            "texelMs": 3752,
+            "postMs": 32
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": true,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": [],
+    "stale": "2026-11-17 terrain fix (icefoot.js onIce ramp + relief.js sheet swell fade): retake"
+  },
+  {
+    "id": "S04b",
+    "name": "04 冰缘省域｜走近融水泵房服务入口",
+    "file": "shots/final/S04b.png",
+    "idle": true,
+    "ms": 1334508,
+    "pose": {
+      "lat": 73.62426509999997,
+      "lon": 53.327253,
+      "alt": 425.6800000006333,
+      "heading": 60,
+      "pitch": -2.0000000000000004,
+      "roll": 0,
+      "fov": 35,
+      "lens": 24
+    },
+    "stats": {
+      "fps": 13.99810026527303,
+      "frame": 23863,
+      "calls": 9473,
+      "triangles": 85340010,
+      "geometries": 4764,
+      "textures": 10421,
+      "programs": 77,
+      "heapMB": 1371,
+      "workers": {
+        "submitted": 4029,
+        "completed": 3620,
+        "cancelled": 409,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "terrainTile": {
+            "n": 2525,
+            "avg": 1393,
+            "max": 10775,
+            "wait": 543075,
+            "lag": 67
+          },
+          "canals": {
+            "n": 16,
+            "avg": 1,
+            "max": 2,
+            "wait": 417,
+            "lag": 35
+          },
+          "terrainTiles": {
+            "n": 1050,
+            "avg": 1475,
+            "max": 4206,
+            "wait": 116099,
+            "lag": 50
+          },
+          "buildingTextures": {
+            "n": 29,
+            "avg": 103,
+            "max": 317,
+            "wait": 229871,
+            "lag": 76
+          }
+        }
+      },
+      "city": {
+        "submitted": 573,
+        "completed": 573,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 521,
+            "avg": 3,
+            "max": 507,
+            "wait": 2279,
+            "lag": 0
+          },
+          "cityStreets": {
+            "n": 26,
+            "avg": 29,
+            "max": 145,
+            "wait": 312,
+            "lag": 2
+          },
+          "cityBuilding": {
+            "n": 26,
+            "avg": 61,
+            "max": 191,
+            "wait": 304,
+            "lag": 7
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 3210,
+        "loading": 0,
+        "queued": 0,
+        "upgrading": 0,
+        "buildByTex": {
+          "64": {
+            "n": 60,
+            "avgMs": 119,
+            "maxMs": 518,
+            "slowest": "2/4/10/6 U4096 W0",
+            "vertexMs": 32,
+            "texelMs": 80,
+            "postMs": 7
+          },
+          "128": {
+            "n": 4247,
+            "avgMs": 369,
+            "maxMs": 1495,
+            "slowest": "2/3/4/1 U16384 W4254",
+            "vertexMs": 56,
+            "texelMs": 308,
+            "postMs": 5
+          },
+          "256": {
+            "n": 2377,
+            "avgMs": 1364,
+            "maxMs": 2941,
+            "slowest": "2/14/10611/6419 U66564 W69761",
+            "vertexMs": 62,
+            "texelMs": 1292,
+            "postMs": 9
+          },
+          "512": {
+            "n": 41,
+            "avgMs": 6007,
+            "maxMs": 10775,
+            "slowest": "2/17/84851/51042 U264196 W266369",
+            "vertexMs": 61,
+            "texelMs": 5908,
+            "postMs": 38
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": true,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": [],
+    "stale": "2026-11-17 terrain fix (icefoot.js onIce ramp + relief.js sheet swell fade): retake"
+  },
+  {
+    "id": "S05",
+    "name": "05 宜居城群｜从水上看见多座城市连成岸带",
+    "file": "shots/final/S05.png",
+    "idle": true,
+    "ms": 2337589,
+    "pose": {
+      "lat": 0.5312699999999999,
+      "lon": 129.9526,
+      "alt": 20.00000000046566,
+      "heading": 12.699999999999989,
+      "pitch": 1.9999999999999885,
+      "roll": 0,
+      "fov": 35,
+      "lens": 45
+    },
+    "stats": {
+      "fps": 13.14583637831266,
+      "frame": 24286,
+      "calls": 8631,
+      "triangles": 98144514,
+      "geometries": 6419,
+      "textures": 16147,
+      "programs": 81,
+      "heapMB": 1921,
+      "workers": {
+        "submitted": 5762,
+        "completed": 5661,
+        "cancelled": 101,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "terrainTile": {
+            "n": 4027,
+            "avg": 1452,
+            "max": 9043,
+            "wait": 901946,
+            "lag": 125
+          },
+          "terrainTiles": {
+            "n": 1605,
+            "avg": 1655,
+            "max": 4505,
+            "wait": 196765,
+            "lag": 151
+          },
+          "buildingTextures": {
+            "n": 29,
+            "avg": 62,
+            "max": 272,
+            "wait": 75626,
+            "lag": 153
+          }
+        }
+      },
+      "city": {
+        "submitted": 571,
+        "completed": 567,
+        "cancelled": 4,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 526,
+            "avg": 84,
+            "max": 294,
+            "wait": 17752,
+            "lag": 57
+          },
+          "cityStreets": {
+            "n": 28,
+            "avg": 0,
+            "max": 1,
+            "wait": 430,
+            "lag": 0
+          },
+          "cityBridge": {
+            "n": 1,
+            "avg": 24,
+            "max": 24,
+            "wait": 1,
+            "lag": 0
+          },
+          "cityBuilding": {
+            "n": 12,
+            "avg": 96,
+            "max": 229,
+            "wait": 18658,
+            "lag": 275
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 4866,
+        "loading": 0,
+        "queued": 0,
+        "upgrading": 0,
+        "buildByTex": {
+          "64": {
+            "n": 48,
+            "avgMs": 339,
+            "maxMs": 971,
+            "slowest": "0/2/2/2 U4096 W4451",
+            "vertexMs": 80,
+            "texelMs": 241,
+            "postMs": 17
+          },
+          "128": {
+            "n": 6461,
+            "avgMs": 415,
+            "maxMs": 1462,
+            "slowest": "0/11/1936/1041 U16384 W0",
+            "vertexMs": 65,
+            "texelMs": 342,
+            "postMs": 8
+          },
+          "256": {
+            "n": 3871,
+            "avgMs": 1429,
+            "maxMs": 3288,
+            "slowest": "0/8/253/165 U65536 W0",
+            "vertexMs": 71,
+            "texelMs": 1344,
+            "postMs": 13
+          },
+          "512": {
+            "n": 67,
+            "avgMs": 4131,
+            "maxMs": 9043,
+            "slowest": "0/11/1934/1045 U262144 W0",
+            "vertexMs": 44,
+            "texelMs": 4050,
+            "postMs": 37
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": true,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "S05b",
+    "name": "05 宜居城群｜备选：南盆港群航道与 BZ5 斜拉桥",
+    "file": "shots/final/S05b.png",
+    "idle": true,
+    "ms": 755160,
+    "pose": {
+      "lat": -38.37250000000001,
+      "lon": 103.18,
+      "alt": 24.00000000046566,
+      "heading": 351.99999999999994,
+      "pitch": 0.4999999999999907,
+      "roll": 0,
+      "fov": 35,
+      "lens": 50
+    },
+    "stats": {
+      "fps": 24.982366839200985,
+      "frame": 6520,
+      "calls": 5507,
+      "triangles": 114863945,
+      "geometries": 3242,
+      "textures": 7294,
+      "programs": 85,
+      "heapMB": 1865,
+      "workers": {
+        "submitted": 1972,
+        "completed": 1834,
+        "cancelled": 138,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "terrainTile": {
+            "n": 1272,
+            "avg": 1371,
+            "max": 12140,
+            "wait": 179481,
+            "lag": 288
+          },
+          "terrainTiles": {
+            "n": 533,
+            "avg": 1208,
+            "max": 3276,
+            "wait": 77352,
+            "lag": 298
+          },
+          "buildingTextures": {
+            "n": 29,
+            "avg": 78,
+            "max": 290,
+            "wait": 89078,
+            "lag": 197
+          }
+        }
+      },
+      "city": {
+        "submitted": 651,
+        "completed": 651,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 501,
+            "avg": 52,
+            "max": 285,
+            "wait": 21969,
+            "lag": 135
+          },
+          "cityStreets": {
+            "n": 30,
+            "avg": 19,
+            "max": 209,
+            "wait": 500,
+            "lag": 1
+          },
+          "cityBridge": {
+            "n": 1,
+            "avg": 35,
+            "max": 35,
+            "wait": 14,
+            "lag": 0
+          },
+          "cityBuilding": {
+            "n": 119,
+            "avg": 64,
+            "max": 203,
+            "wait": 9107,
+            "lag": 115
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 1647,
+        "loading": 0,
+        "queued": 0,
+        "upgrading": 0,
+        "buildByTex": {
+          "64": {
+            "n": 44,
+            "avgMs": 352,
+            "maxMs": 777,
+            "slowest": "0/4/11/0 U4096 W4258",
+            "vertexMs": 60,
+            "texelMs": 274,
+            "postMs": 18
+          },
+          "128": {
+            "n": 2171,
+            "avgMs": 304,
+            "maxMs": 1417,
+            "slowest": "0/1/1/1 U4356 W4531",
+            "vertexMs": 32,
+            "texelMs": 265,
+            "postMs": 7
+          },
+          "256": {
+            "n": 1022,
+            "avgMs": 902,
+            "maxMs": 3067,
+            "slowest": "0/10/662/72 U65536 W0",
+            "vertexMs": 29,
+            "texelMs": 863,
+            "postMs": 11
+          },
+          "512": {
+            "n": 167,
+            "avgMs": 4724,
+            "maxMs": 12140,
+            "slowest": "0/9/328/39 U262144 W0",
+            "vertexMs": 32,
+            "texelMs": 4640,
+            "postMs": 51
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": true,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "S06",
+    "name": "06 峡谷晚班｜一条通勤线在蓝调时刻亮起",
+    "file": "shots/final/S06.png",
+    "idle": false,
+    "ms": 2713471,
+    "pose": {
+      "lat": 34.858355999999986,
+      "lon": -105.313261,
+      "alt": 1123.380000000354,
+      "heading": 70,
+      "pitch": -3.000000000000001,
+      "roll": 0,
+      "fov": 35,
+      "lens": 40
+    },
+    "stats": {
+      "fps": 10.306216016402551,
+      "frame": 23467,
+      "calls": 10519,
+      "triangles": 124180131,
+      "geometries": 8436,
+      "textures": 27100,
+      "programs": 79,
+      "heapMB": 2183,
+      "workers": {
+        "submitted": 7755,
+        "completed": 4776,
+        "cancelled": 542,
+        "failed": 0,
+        "pending": 2437,
+        "byType": {
+          "terrainTile": {
+            "n": 2437,
+            "avg": 2127,
+            "max": 20793,
+            "wait": 1033224,
+            "lag": 150
+          },
+          "canals": {
+            "n": 24,
+            "avg": 1,
+            "max": 4,
+            "wait": 827,
+            "lag": 80
+          },
+          "terrainTiles": {
+            "n": 2286,
+            "avg": 2106,
+            "max": 8589,
+            "wait": 332146,
+            "lag": 190
+          },
+          "buildingTextures": {
+            "n": 29,
+            "avg": 80,
+            "max": 276,
+            "wait": 353280,
+            "lag": 147
+          }
+        }
+      },
+      "city": {
+        "submitted": 893,
+        "completed": 892,
+        "cancelled": 1,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 525,
+            "avg": 62,
+            "max": 316,
+            "wait": 17235,
+            "lag": 38
+          },
+          "cityBuilding": {
+            "n": 340,
+            "avg": 9,
+            "max": 77,
+            "wait": 727,
+            "lag": 6
+          },
+          "cityStreets": {
+            "n": 27,
+            "avg": 100,
+            "max": 154,
+            "wait": 1319,
+            "lag": 3
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 6915,
+        "loading": 0,
+        "queued": 2,
+        "upgrading": 2439,
+        "buildByTex": {
+          "64": {
+            "n": 60,
+            "avgMs": 188,
+            "maxMs": 398,
+            "slowest": "1/10/337/919 U4096 W4255",
+            "vertexMs": 37,
+            "texelMs": 143,
+            "postMs": 8
+          },
+          "128": {
+            "n": 9162,
+            "avgMs": 526,
+            "maxMs": 3213,
+            "slowest": "1/11/736/1840 U16384 W0",
+            "vertexMs": 71,
+            "texelMs": 447,
+            "postMs": 8
+          },
+          "256": {
+            "n": 2334,
+            "avgMs": 2133,
+            "maxMs": 7067,
+            "slowest": "1/10/375/930 U65536 W4413",
+            "vertexMs": 83,
+            "texelMs": 2027,
+            "postMs": 23
+          },
+          "512": {
+            "n": 23,
+            "avgMs": 7874,
+            "maxMs": 20793,
+            "slowest": "1/9/173/461 U262144 W0",
+            "vertexMs": 68,
+            "texelMs": 7731,
+            "postMs": 75
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": false,
+        "clouds": true,
+        "terrain": false,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": [],
+    "lastAttempt": {
+      "error": "Error: page.evaluate: Target page, context or browser has been closed\nBrowser logs:\n\n<launching> /Applications/Google Chrome.app/Contents/MacOS/Google Chrome --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,AvoidCorsURLLoaderRestartOnRedirect,Translate,AutoDeElevate,OptimizationHints,NetworkTimeServiceQuerying,AimEnabled,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --use-angle=metal --enable-gpu --ignore-gpu-blocklist --disable-background-timer-throttling --disable-renderer-backgrounding --user-data-dir=/var/folders/78/28bbwzn95778cjfgb6pfbnl80000gn/T/playwright_chromiumdev_profile-KHFno7 --remote-debugging-pipe --no-startup-window\n<launched> pid=61004\n[pid=61004][err] Trying to load the allocator multiple times. This is *not* supported.\n[pid=61004][err] [61010:20232194:1117/120328.524862:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670\n[pid=61004][err] [61010:20232235:1117/120328.525057:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670\n[pid=61004][err] [61010:20232194:1117/120328.526639:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670\n[pid=61004][err] [61010:20232235:1117/120328.526691:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670\n[pid=61004][err] [61010:20232194:1117/120328.526787:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670\n[pid=61004][err] [61010:20232235:1117/120328.526831:ERROR:ui/display/mac/cv_display_link_mac.mm:188] CVDisplayLinkCreateWithCGDisplay failed. CVReturn: -6670\n[pid=61004][err] Trying to load the allocator multiple times. This is *not* supported.\n[pid=61004][err] WARNING: All log messages before absl::InitializeLog() is called are written to STDERR\n[pid=61004][err] I0000 00:00:1794888388.521375 20234816 environment.cc:526] Selected adapter: Apple M5, arch=metal-3, vendor=apple, backend=Metal, adapterType=Integrated GPU\n[pid=61004][err] I0000 00:00:1794888388.532427 20234836 environment.cc:526] Selected adapter: Apple M5, arch=metal-3, vendor=apple, backend=Metal, adapterType=Integrated GPU\n[pid=61004] <gracefully close start>\n[pid=61004] <forcefully close>\n[pid=61004] <kill>\n[pid=61004] <will force kill>",
+      "ms": 258857,
+      "at": "2026-11-17T04:07:48.259Z"
+    }
+  },
+  {
+    "id": "S07",
+    "name": "07 普通建筑｜定格一 街对面",
+    "file": "shots/final/S07.png",
+    "idle": false,
+    "ms": 327269,
+    "pose": {
+      "lat": 22.2180702,
+      "lon": 118.2545478,
+      "alt": 453.2599999997765,
+      "heading": 2,
+      "pitch": 2.000000000000002,
+      "roll": 0,
+      "fov": 35,
+      "lens": 28
+    },
+    "stats": {
+      "fps": 46.98927043255302,
+      "frame": 3681,
+      "calls": 2434,
+      "triangles": 124682643,
+      "geometries": 1252,
+      "textures": 3456,
+      "programs": 103,
+      "heapMB": 1109,
+      "workers": {
+        "submitted": 613,
+        "completed": 444,
+        "cancelled": 32,
+        "failed": 0,
+        "pending": 137,
+        "byType": {
+          "buildingTextures": {
+            "n": 29,
+            "avg": 550,
+            "max": 1692,
+            "wait": 123149,
+            "lag": 311
+          },
+          "terrainTile": {
+            "n": 227,
+            "avg": 4602,
+            "max": 14886,
+            "wait": 18875,
+            "lag": 164
+          },
+          "terrainTiles": {
+            "n": 188,
+            "avg": 6545,
+            "max": 23414,
+            "wait": 70906,
+            "lag": 202
+          }
+        }
+      },
+      "city": {
+        "submitted": 1464,
+        "completed": 1464,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 521,
+            "avg": 271,
+            "max": 1233,
+            "wait": 105232,
+            "lag": 267
+          },
+          "cityBuilding": {
+            "n": 915,
+            "avg": 139,
+            "max": 1872,
+            "wait": 2198,
+            "lag": 170
+          },
+          "cityStreets": {
+            "n": 28,
+            "avg": 925,
+            "max": 2600,
+            "wait": 17493,
+            "lag": 286
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 615,
+        "loading": 256,
+        "queued": 8,
+        "upgrading": 75,
+        "buildByTex": {
+          "64": {
+            "n": 56,
+            "avgMs": 1789,
+            "maxMs": 4082,
+            "slowest": "0/4/13/12 U4096 W0",
+            "vertexMs": 234,
+            "texelMs": 1484,
+            "postMs": 70
+          },
+          "128": {
+            "n": 762,
+            "avgMs": 1655,
+            "maxMs": 7208,
+            "slowest": "0/3/6/4 U16384 W4466",
+            "vertexMs": 138,
+            "texelMs": 1466,
+            "postMs": 51
+          },
+          "256": {
+            "n": 119,
+            "avgMs": 3851,
+            "maxMs": 8594,
+            "slowest": "0/5/24/28 U16900 W0",
+            "vertexMs": 127,
+            "texelMs": 3679,
+            "postMs": 45
+          },
+          "512": {
+            "n": 34,
+            "avgMs": 12982,
+            "maxMs": 14886,
+            "slowest": "0/18/213370/203536 U264365 W0",
+            "vertexMs": 102,
+            "texelMs": 12745,
+            "postMs": 134
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": false,
+        "clouds": true,
+        "terrain": false,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "S07b",
+    "name": "07 普通建筑｜定格二 入口与门厅",
+    "file": "shots/final/S07b.png",
+    "idle": false,
+    "ms": 334181,
+    "pose": {
+      "lat": 22.218594363949403,
+      "lon": 118.25475430261534,
+      "alt": 453.95257558627054,
+      "heading": 64.8917408430392,
+      "pitch": 2.3987693858898957,
+      "roll": 0,
+      "fov": 35,
+      "lens": 28
+    },
+    "stats": {
+      "fps": 41.86914224611059,
+      "frame": 2966,
+      "calls": 2919,
+      "triangles": 137217664,
+      "geometries": 1364,
+      "textures": 3606,
+      "programs": 103,
+      "heapMB": 1237,
+      "workers": {
+        "submitted": 672,
+        "completed": 463,
+        "cancelled": 33,
+        "failed": 0,
+        "pending": 176,
+        "byType": {
+          "buildingTextures": {
+            "n": 29,
+            "avg": 380,
+            "max": 1162,
+            "wait": 118390,
+            "lag": 379
+          },
+          "terrainTile": {
+            "n": 233,
+            "avg": 4275,
+            "max": 14971,
+            "wait": 18468,
+            "lag": 187
+          },
+          "building": {
+            "n": 1,
+            "avg": 608,
+            "max": 608,
+            "wait": 0,
+            "lag": 1
+          },
+          "terrainTiles": {
+            "n": 200,
+            "avg": 6583,
+            "max": 20553,
+            "wait": 80120,
+            "lag": 236
+          }
+        }
+      },
+      "city": {
+        "submitted": 1381,
+        "completed": 1376,
+        "cancelled": 5,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "buildingSpec": {
+            "n": 1,
+            "avg": 72,
+            "max": 72,
+            "wait": 1133,
+            "lag": 18
+          },
+          "cityTile": {
+            "n": 522,
+            "avg": 292,
+            "max": 2447,
+            "wait": 120554,
+            "lag": 387
+          },
+          "cityBuilding": {
+            "n": 825,
+            "avg": 140,
+            "max": 2765,
+            "wait": 2759,
+            "lag": 221
+          },
+          "cityStreets": {
+            "n": 28,
+            "avg": 792,
+            "max": 1797,
+            "wait": 17055,
+            "lag": 275
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 657,
+        "loading": 360,
+        "queued": 0,
+        "upgrading": 86,
+        "buildByTex": {
+          "64": {
+            "n": 56,
+            "avgMs": 1738,
+            "maxMs": 5364,
+            "slowest": "0/2/2/2 U4096 W4451",
+            "vertexMs": 193,
+            "texelMs": 1483,
+            "postMs": 61
+          },
+          "128": {
+            "n": 818,
+            "avgMs": 1668,
+            "maxMs": 6268,
+            "slowest": "0/3/6/5 U16384 W4229",
+            "vertexMs": 153,
+            "texelMs": 1459,
+            "postMs": 56
+          },
+          "256": {
+            "n": 128,
+            "avgMs": 3589,
+            "maxMs": 7123,
+            "slowest": "0/8/211/199 U65536 W0",
+            "vertexMs": 117,
+            "texelMs": 3423,
+            "postMs": 48
+          },
+          "512": {
+            "n": 31,
+            "avgMs": 12637,
+            "maxMs": 14971,
+            "slowest": "0/19/426743/407070 U264637 W0",
+            "vertexMs": 128,
+            "texelMs": 12383,
+            "postMs": 125
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": false,
+        "clouds": true,
+        "terrain": false,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "S07s",
+    "name": "07 普通建筑｜楼梯（定格二→三之间）",
+    "file": "shots/final/S07s.png",
+    "idle": false,
+    "ms": 328026,
+    "pose": {
+      "lat": 22.218675309029607,
+      "lon": 118.25499446014186,
+      "alt": 454.63000087765977,
+      "heading": 81.24001994454568,
+      "pitch": 21.624235505649068,
+      "roll": 0,
+      "fov": 35,
+      "lens": 28
+    },
+    "stats": {
+      "fps": 31.771659331916737,
+      "frame": 3240,
+      "calls": 2485,
+      "triangles": 132802903,
+      "geometries": 1389,
+      "textures": 4414,
+      "programs": 103,
+      "heapMB": 1337,
+      "workers": {
+        "submitted": 814,
+        "completed": 646,
+        "cancelled": 34,
+        "failed": 0,
+        "pending": 134,
+        "byType": {
+          "buildingTextures": {
+            "n": 29,
+            "avg": 271,
+            "max": 1788,
+            "wait": 129526,
+            "lag": 420
+          },
+          "terrainTile": {
+            "n": 341,
+            "avg": 2957,
+            "max": 8211,
+            "wait": 13352,
+            "lag": 160
+          },
+          "building": {
+            "n": 1,
+            "avg": 515,
+            "max": 515,
+            "wait": 1683,
+            "lag": 247
+          },
+          "terrainTiles": {
+            "n": 275,
+            "avg": 4798,
+            "max": 19878,
+            "wait": 72707,
+            "lag": 183
+          }
+        }
+      },
+      "city": {
+        "submitted": 1369,
+        "completed": 1361,
+        "cancelled": 8,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "buildingSpec": {
+            "n": 1,
+            "avg": 316,
+            "max": 316,
+            "wait": 1037,
+            "lag": 0
+          },
+          "cityTile": {
+            "n": 520,
+            "avg": 255,
+            "max": 2860,
+            "wait": 119263,
+            "lag": 370
+          },
+          "cityBuilding": {
+            "n": 812,
+            "avg": 147,
+            "max": 2860,
+            "wait": 2850,
+            "lag": 219
+          },
+          "cityStreets": {
+            "n": 28,
+            "avg": 816,
+            "max": 2158,
+            "wait": 19402,
+            "lag": 286
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 879,
+        "loading": 100,
+        "queued": 4,
+        "upgrading": 110,
+        "buildByTex": {
+          "64": {
+            "n": 56,
+            "avgMs": 1848,
+            "maxMs": 7731,
+            "slowest": "0/2/2/2 U4096 W4451",
+            "vertexMs": 265,
+            "texelMs": 1536,
+            "postMs": 48
+          },
+          "128": {
+            "n": 1114,
+            "avgMs": 1229,
+            "maxMs": 7223,
+            "slowest": "0/1/1/1 U4356 W4531",
+            "vertexMs": 121,
+            "texelMs": 1069,
+            "postMs": 39
+          },
+          "256": {
+            "n": 218,
+            "avgMs": 2570,
+            "maxMs": 7516,
+            "slowest": "0/10/837/793 U65536 W0",
+            "vertexMs": 79,
+            "texelMs": 2459,
+            "postMs": 32
+          },
+          "512": {
+            "n": 49,
+            "avgMs": 5962,
+            "maxMs": 8211,
+            "slowest": "0/15/26675/25440 U265877 W0",
+            "vertexMs": 55,
+            "texelMs": 5833,
+            "postMs": 75
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": false,
+        "clouds": true,
+        "terrain": false,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "S07c",
+    "name": "07 普通建筑｜定格三 二层起居室回望站台",
+    "file": "shots/final/S07c.png",
+    "idle": false,
+    "ms": 330325,
+    "pose": {
+      "lat": 22.218774453619826,
+      "lon": 118.25492253890526,
+      "alt": 458.230011313688,
+      "heading": 273.078359552591,
+      "pitch": -3.0348611517066604,
+      "roll": 0,
+      "fov": 35,
+      "lens": 28
+    },
+    "stats": {
+      "fps": 39.42689467411774,
+      "frame": 3274,
+      "calls": 2508,
+      "triangles": 143743414,
+      "geometries": 1310,
+      "textures": 3656,
+      "programs": 102,
+      "heapMB": 1164,
+      "workers": {
+        "submitted": 647,
+        "completed": 454,
+        "cancelled": 33,
+        "failed": 0,
+        "pending": 160,
+        "byType": {
+          "buildingTextures": {
+            "n": 29,
+            "avg": 424,
+            "max": 1255,
+            "wait": 125751,
+            "lag": 425
+          },
+          "terrainTile": {
+            "n": 221,
+            "avg": 4643,
+            "max": 14766,
+            "wait": 18977,
+            "lag": 167
+          },
+          "building": {
+            "n": 1,
+            "avg": 209,
+            "max": 209,
+            "wait": 0,
+            "lag": 295
+          },
+          "terrainTiles": {
+            "n": 203,
+            "avg": 6302,
+            "max": 24192,
+            "wait": 67451,
+            "lag": 197
+          }
+        }
+      },
+      "city": {
+        "submitted": 1559,
+        "completed": 1559,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "buildingSpec": {
+            "n": 1,
+            "avg": 177,
+            "max": 177,
+            "wait": 1119,
+            "lag": 91
+          },
+          "cityTile": {
+            "n": 521,
+            "avg": 271,
+            "max": 1992,
+            "wait": 119575,
+            "lag": 374
+          },
+          "cityStreets": {
+            "n": 28,
+            "avg": 950,
+            "max": 3330,
+            "wait": 21852,
+            "lag": 265
+          },
+          "cityBuilding": {
+            "n": 1009,
+            "avg": 123,
+            "max": 2556,
+            "wait": 2121,
+            "lag": 180
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 666,
+        "loading": 340,
+        "queued": 3,
+        "upgrading": 78,
+        "buildByTex": {
+          "64": {
+            "n": 56,
+            "avgMs": 2558,
+            "maxMs": 6127,
+            "slowest": "0/7/104/99 U1156 W0",
+            "vertexMs": 330,
+            "texelMs": 2140,
+            "postMs": 88
+          },
+          "128": {
+            "n": 830,
+            "avgMs": 1599,
+            "maxMs": 9148,
+            "slowest": "0/3/6/4 U16384 W4466",
+            "vertexMs": 143,
+            "texelMs": 1409,
+            "postMs": 48
+          },
+          "256": {
+            "n": 113,
+            "avgMs": 3751,
+            "maxMs": 11925,
+            "slowest": "0/10/830/796 U65536 W0",
+            "vertexMs": 137,
+            "texelMs": 3567,
+            "postMs": 47
+          },
+          "512": {
+            "n": 31,
+            "avgMs": 12829,
+            "maxMs": 14766,
+            "slowest": "0/17/106681/101769 U264485 W0",
+            "vertexMs": 129,
+            "texelMs": 12569,
+            "postMs": 130
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": false,
+        "clouds": true,
+        "terrain": false,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "S07d",
+    "name": "07 普通建筑｜定格四 后院",
+    "file": "shots/final/S07d.png",
+    "idle": false,
+    "ms": 350619,
+    "pose": {
+      "lat": 22.218459700000004,
+      "lon": 118.25536040000001,
+      "alt": 455.2999999993481,
+      "heading": 292,
+      "pitch": 7.999999999999998,
+      "roll": 0,
+      "fov": 35,
+      "lens": 24
+    },
+    "stats": {
+      "fps": 43.36593022406041,
+      "frame": 2829,
+      "calls": 3012,
+      "triangles": 147049855,
+      "geometries": 1364,
+      "textures": 3522,
+      "programs": 103,
+      "heapMB": 1083,
+      "workers": {
+        "submitted": 660,
+        "completed": 470,
+        "cancelled": 37,
+        "failed": 0,
+        "pending": 153,
+        "byType": {
+          "buildingTextures": {
+            "n": 29,
+            "avg": 419,
+            "max": 1502,
+            "wait": 111773,
+            "lag": 224
+          },
+          "terrainTile": {
+            "n": 250,
+            "avg": 4516,
+            "max": 14157,
+            "wait": 22722,
+            "lag": 218
+          },
+          "terrainTiles": {
+            "n": 191,
+            "avg": 6068,
+            "max": 18153,
+            "wait": 69010,
+            "lag": 253
+          }
+        }
+      },
+      "city": {
+        "submitted": 1482,
+        "completed": 1479,
+        "cancelled": 3,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 525,
+            "avg": 263,
+            "max": 1369,
+            "wait": 124358,
+            "lag": 407
+          },
+          "cityBuilding": {
+            "n": 927,
+            "avg": 121,
+            "max": 2192,
+            "wait": 2480,
+            "lag": 223
+          },
+          "cityStreets": {
+            "n": 27,
+            "avg": 778,
+            "max": 1802,
+            "wait": 25078,
+            "lag": 360
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 630,
+        "loading": 268,
+        "queued": 4,
+        "upgrading": 90,
+        "buildByTex": {
+          "64": {
+            "n": 56,
+            "avgMs": 1807,
+            "maxMs": 5421,
+            "slowest": "0/2/2/2 U4096 W4451",
+            "vertexMs": 203,
+            "texelMs": 1535,
+            "postMs": 69
+          },
+          "128": {
+            "n": 782,
+            "avgMs": 1538,
+            "maxMs": 5587,
+            "slowest": "0/3/6/4 U16384 W4466",
+            "vertexMs": 142,
+            "texelMs": 1350,
+            "postMs": 46
+          },
+          "256": {
+            "n": 137,
+            "avgMs": 3925,
+            "maxMs": 9763,
+            "slowest": "0/5/22/25 U16900 W4342",
+            "vertexMs": 142,
+            "texelMs": 3733,
+            "postMs": 49
+          },
+          "512": {
+            "n": 35,
+            "avgMs": 12312,
+            "maxMs": 14156,
+            "slowest": "0/19/426740/407069 U264637 W0",
+            "vertexMs": 131,
+            "texelMs": 12051,
+            "postMs": 130
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": false,
+        "clouds": true,
+        "terrain": false,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "S07O",
+    "name": "07 普通建筑｜富氧区版 定格一 检修道",
+    "file": "shots/final/S07O.png",
+    "idle": false,
+    "ms": 340278,
+    "pose": {
+      "lat": 7.142669182535332,
+      "lon": 104.94520323178085,
+      "alt": 105.22012548521161,
+      "heading": 46.64365090241381,
+      "pitch": -12.406971958127933,
+      "roll": 0,
+      "fov": 35,
+      "lens": 24
+    },
+    "stats": {
+      "fps": 45.68463261658481,
+      "frame": 12597,
+      "calls": 2246,
+      "triangles": 18104589,
+      "geometries": 1083,
+      "textures": 2718,
+      "programs": 88,
+      "heapMB": 466,
+      "workers": {
+        "submitted": 893,
+        "completed": 312,
+        "cancelled": 119,
+        "failed": 0,
+        "pending": 462,
+        "byType": {
+          "buildingTextures": {
+            "n": 2,
+            "avg": 630,
+            "max": 788,
+            "wait": 0,
+            "lag": 602
+          },
+          "terrainTile": {
+            "n": 115,
+            "avg": 5063,
+            "max": 12388,
+            "wait": 25874,
+            "lag": 35
+          },
+          "building": {
+            "n": 1,
+            "avg": 387,
+            "max": 387,
+            "wait": 1743,
+            "lag": 233
+          },
+          "canals": {
+            "n": 4,
+            "avg": 1,
+            "max": 2,
+            "wait": 2028,
+            "lag": 0
+          },
+          "terrainTiles": {
+            "n": 191,
+            "avg": 9530,
+            "max": 20561,
+            "wait": 82319,
+            "lag": 25
+          }
+        }
+      },
+      "city": {
+        "submitted": 554,
+        "completed": 553,
+        "cancelled": 1,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "buildingSpec": {
+            "n": 1,
+            "avg": 648,
+            "max": 648,
+            "wait": 609,
+            "lag": 54
+          },
+          "cityTile": {
+            "n": 522,
+            "avg": 32,
+            "max": 2521,
+            "wait": 7394,
+            "lag": 6
+          },
+          "cityStreets": {
+            "n": 22,
+            "avg": 269,
+            "max": 563,
+            "wait": 830,
+            "lag": 34
+          },
+          "cityBuilding": {
+            "n": 8,
+            "avg": 124,
+            "max": 314,
+            "wait": 222,
+            "lag": 48
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 624,
+        "loading": 968,
+        "queued": 0,
+        "upgrading": 193,
+        "buildByTex": {
+          "64": {
+            "n": 52,
+            "avgMs": 2264,
+            "maxMs": 4819,
+            "slowest": "0/2/2/2 U4096 W4451",
+            "vertexMs": 435,
+            "texelMs": 1752,
+            "postMs": 77
+          },
+          "128": {
+            "n": 778,
+            "avgMs": 2406,
+            "maxMs": 5971,
+            "slowest": "0/9/341/296 U16384 W4343",
+            "vertexMs": 357,
+            "texelMs": 2019,
+            "postMs": 30
+          },
+          "256": {
+            "n": 45,
+            "avgMs": 8832,
+            "maxMs": 12388,
+            "slowest": "0/19/349207/305197 U66564 W69761",
+            "vertexMs": 437,
+            "texelMs": 8338,
+            "postMs": 56
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": false,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "S07Ob",
+    "name": "07 普通建筑｜富氧区版 定格二 值守入口",
+    "file": "shots/final/S07Ob.png",
+    "idle": false,
+    "ms": 325074,
+    "pose": {
+      "lat": 7.1424644200599,
+      "lon": 104.9445119756244,
+      "alt": 100.30060169287026,
+      "heading": 47.34521021944806,
+      "pitch": -1.0451324252356378,
+      "roll": 0,
+      "fov": 35,
+      "lens": 28
+    },
+    "stats": {
+      "fps": 41.84474611149127,
+      "frame": 13149,
+      "calls": 1901,
+      "triangles": 14782012,
+      "geometries": 1148,
+      "textures": 2928,
+      "programs": 88,
+      "heapMB": 471,
+      "workers": {
+        "submitted": 1016,
+        "completed": 329,
+        "cancelled": 128,
+        "failed": 0,
+        "pending": 559,
+        "byType": {
+          "buildingTextures": {
+            "n": 2,
+            "avg": 612,
+            "max": 821,
+            "wait": 0,
+            "lag": 553
+          },
+          "terrainTile": {
+            "n": 113,
+            "avg": 4677,
+            "max": 11671,
+            "wait": 23247,
+            "lag": 37
+          },
+          "building": {
+            "n": 1,
+            "avg": 192,
+            "max": 192,
+            "wait": 37,
+            "lag": 149
+          },
+          "canals": {
+            "n": 4,
+            "avg": 3,
+            "max": 6,
+            "wait": 3546,
+            "lag": 8
+          },
+          "terrainTiles": {
+            "n": 210,
+            "avg": 8839,
+            "max": 18571,
+            "wait": 82150,
+            "lag": 21
+          }
+        }
+      },
+      "city": {
+        "submitted": 556,
+        "completed": 555,
+        "cancelled": 1,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "buildingSpec": {
+            "n": 1,
+            "avg": 698,
+            "max": 698,
+            "wait": 1048,
+            "lag": 2
+          },
+          "cityTile": {
+            "n": 523,
+            "avg": 25,
+            "max": 1492,
+            "wait": 7002,
+            "lag": 3
+          },
+          "cityBuilding": {
+            "n": 8,
+            "avg": 155,
+            "max": 483,
+            "wait": 258,
+            "lag": 162
+          },
+          "cityStreets": {
+            "n": 23,
+            "avg": 304,
+            "max": 754,
+            "wait": 898,
+            "lag": 45
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 684,
+        "loading": 1220,
+        "queued": 0,
+        "upgrading": 227,
+        "buildByTex": {
+          "64": {
+            "n": 56,
+            "avgMs": 2181,
+            "maxMs": 4354,
+            "slowest": "0/4/10/9 U4096 W4671",
+            "vertexMs": 455,
+            "texelMs": 1653,
+            "postMs": 73
+          },
+          "128": {
+            "n": 854,
+            "avgMs": 2234,
+            "maxMs": 5938,
+            "slowest": "0/3/6/6 U16384 W0",
+            "vertexMs": 341,
+            "texelMs": 1866,
+            "postMs": 28
+          },
+          "256": {
+            "n": 39,
+            "avgMs": 8772,
+            "maxMs": 11671,
+            "slowest": "0/18/174604/152596 U66733 W69761",
+            "vertexMs": 425,
+            "texelMs": 8306,
+            "postMs": 41
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": false,
+        "clouds": true,
+        "terrain": false,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "S07Oc",
+    "name": "07 普通建筑｜富氧区版 楼梯",
+    "file": "shots/final/S07Oc.png",
+    "idle": false,
+    "ms": 328314,
+    "pose": {
+      "lat": 7.142579418941786,
+      "lon": 104.94457055340472,
+      "alt": 100.5200153356418,
+      "heading": 45.766511356327044,
+      "pitch": 7.436213236767787,
+      "roll": 0,
+      "fov": 35,
+      "lens": 28
+    },
+    "stats": {
+      "fps": 39.72577954496814,
+      "frame": 14019,
+      "calls": 1842,
+      "triangles": 14338555,
+      "geometries": 1146,
+      "textures": 2891,
+      "programs": 88,
+      "heapMB": 456,
+      "workers": {
+        "submitted": 1007,
+        "completed": 333,
+        "cancelled": 126,
+        "failed": 0,
+        "pending": 548,
+        "byType": {
+          "buildingTextures": {
+            "n": 2,
+            "avg": 518,
+            "max": 758,
+            "wait": 0,
+            "lag": 513
+          },
+          "terrainTile": {
+            "n": 115,
+            "avg": 4775,
+            "max": 12785,
+            "wait": 24479,
+            "lag": 29
+          },
+          "building": {
+            "n": 1,
+            "avg": 43,
+            "max": 43,
+            "wait": 0,
+            "lag": 2
+          },
+          "canals": {
+            "n": 4,
+            "avg": 2,
+            "max": 2,
+            "wait": 1608,
+            "lag": 10
+          },
+          "terrainTiles": {
+            "n": 211,
+            "avg": 8681,
+            "max": 18530,
+            "wait": 81363,
+            "lag": 24
+          }
+        }
+      },
+      "city": {
+        "submitted": 553,
+        "completed": 553,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "buildingSpec": {
+            "n": 1,
+            "avg": 1048,
+            "max": 1048,
+            "wait": 1027,
+            "lag": 144
+          },
+          "cityTile": {
+            "n": 521,
+            "avg": 23,
+            "max": 1716,
+            "wait": 6243,
+            "lag": 3
+          },
+          "cityStreets": {
+            "n": 23,
+            "avg": 234,
+            "max": 613,
+            "wait": 688,
+            "lag": 13
+          },
+          "cityBuilding": {
+            "n": 8,
+            "avg": 99,
+            "max": 254,
+            "wait": 188,
+            "lag": 103
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 690,
+        "loading": 1184,
+        "queued": 0,
+        "upgrading": 225,
+        "buildByTex": {
+          "64": {
+            "n": 56,
+            "avgMs": 1986,
+            "maxMs": 3573,
+            "slowest": "0/2/2/2 U4096 W4451",
+            "vertexMs": 443,
+            "texelMs": 1478,
+            "postMs": 65
+          },
+          "128": {
+            "n": 862,
+            "avgMs": 2190,
+            "maxMs": 5639,
+            "slowest": "0/9/340/296 U16384 W4424",
+            "vertexMs": 333,
+            "texelMs": 1830,
+            "postMs": 27
+          },
+          "256": {
+            "n": 41,
+            "avgMs": 9312,
+            "maxMs": 12785,
+            "slowest": "0/19/349203/305199 U67005 W66348",
+            "vertexMs": 449,
+            "texelMs": 8807,
+            "postMs": 56
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": false,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "S07Od",
+    "name": "07 普通建筑｜富氧区版 定格三 控制室观察窗看闸池",
+    "file": "shots/final/S07Od.png",
+    "idle": false,
+    "ms": 335639,
+    "pose": {
+      "lat": 7.1426090542614125,
+      "lon": 104.94480575242024,
+      "alt": 105.07000742247328,
+      "heading": 58.328800620532775,
+      "pitch": -10.053806718821114,
+      "roll": 0,
+      "fov": 35,
+      "lens": 28
+    },
+    "stats": {
+      "fps": 45.4218276717327,
+      "frame": 10633,
+      "calls": 2312,
+      "triangles": 18434391,
+      "geometries": 1119,
+      "textures": 2833,
+      "programs": 88,
+      "heapMB": 456,
+      "workers": {
+        "submitted": 970,
+        "completed": 319,
+        "cancelled": 129,
+        "failed": 0,
+        "pending": 522,
+        "byType": {
+          "buildingTextures": {
+            "n": 2,
+            "avg": 604,
+            "max": 713,
+            "wait": 0,
+            "lag": 426
+          },
+          "terrainTile": {
+            "n": 112,
+            "avg": 4799,
+            "max": 12916,
+            "wait": 32132,
+            "lag": 35
+          },
+          "building": {
+            "n": 1,
+            "avg": 275,
+            "max": 275,
+            "wait": 904,
+            "lag": 193
+          },
+          "canals": {
+            "n": 4,
+            "avg": 1,
+            "max": 2,
+            "wait": 2165,
+            "lag": 29
+          },
+          "terrainTiles": {
+            "n": 202,
+            "avg": 9144,
+            "max": 16912,
+            "wait": 81201,
+            "lag": 32
+          }
+        }
+      },
+      "city": {
+        "submitted": 553,
+        "completed": 553,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "buildingSpec": {
+            "n": 1,
+            "avg": 1097,
+            "max": 1097,
+            "wait": 1025,
+            "lag": 0
+          },
+          "cityTile": {
+            "n": 521,
+            "avg": 29,
+            "max": 2448,
+            "wait": 7367,
+            "lag": 5
+          },
+          "cityBuilding": {
+            "n": 8,
+            "avg": 106,
+            "max": 328,
+            "wait": 95,
+            "lag": 53
+          },
+          "cityStreets": {
+            "n": 23,
+            "avg": 291,
+            "max": 742,
+            "wait": 702,
+            "lag": 18
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 657,
+        "loading": 1180,
+        "queued": 0,
+        "upgrading": 200,
+        "buildByTex": {
+          "64": {
+            "n": 56,
+            "avgMs": 2123,
+            "maxMs": 4744,
+            "slowest": "0/2/2/2 U4096 W4451",
+            "vertexMs": 443,
+            "texelMs": 1613,
+            "postMs": 67
+          },
+          "128": {
+            "n": 818,
+            "avgMs": 2305,
+            "maxMs": 5693,
+            "slowest": "0/18/174604/152595 U17069 W19540",
+            "vertexMs": 347,
+            "texelMs": 1931,
+            "postMs": 27
+          },
+          "256": {
+            "n": 38,
+            "avgMs": 9277,
+            "maxMs": 12916,
+            "slowest": "0/19/349206/305196 U66564 W69761",
+            "vertexMs": 461,
+            "texelMs": 8750,
+            "postMs": 66
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": false,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "S07Oe",
+    "name": "07 普通建筑｜富氧区版 定格四 背侧设备院",
+    "file": "shots/final/S07Oe.png",
+    "idle": false,
+    "ms": 336842,
+    "pose": {
+      "lat": 7.142410167881073,
+      "lon": 104.94513974575457,
+      "alt": 100.41696583060548,
+      "heading": 294.3058548864456,
+      "pitch": 2.1266905957633995,
+      "roll": 0,
+      "fov": 35,
+      "lens": 28
+    },
+    "stats": {
+      "fps": 39.411406627797696,
+      "frame": 12898,
+      "calls": 2209,
+      "triangles": 16879286,
+      "geometries": 1017,
+      "textures": 2662,
+      "programs": 90,
+      "heapMB": 483,
+      "workers": {
+        "submitted": 718,
+        "completed": 264,
+        "cancelled": 83,
+        "failed": 0,
+        "pending": 371,
+        "byType": {
+          "buildingTextures": {
+            "n": 2,
+            "avg": 501,
+            "max": 633,
+            "wait": 0,
+            "lag": 550
+          },
+          "terrainTile": {
+            "n": 101,
+            "avg": 4471,
+            "max": 11869,
+            "wait": 10456,
+            "lag": 34
+          },
+          "building": {
+            "n": 1,
+            "avg": 87,
+            "max": 87,
+            "wait": 195,
+            "lag": 248
+          },
+          "canals": {
+            "n": 5,
+            "avg": 2,
+            "max": 3,
+            "wait": 3474,
+            "lag": 2
+          },
+          "terrainTiles": {
+            "n": 157,
+            "avg": 12291,
+            "max": 20420,
+            "wait": 83290,
+            "lag": 22
+          }
+        }
+      },
+      "city": {
+        "submitted": 558,
+        "completed": 558,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "buildingSpec": {
+            "n": 1,
+            "avg": 480,
+            "max": 480,
+            "wait": 522,
+            "lag": 111
+          },
+          "cityTile": {
+            "n": 520,
+            "avg": 111,
+            "max": 1129,
+            "wait": 8719,
+            "lag": 8
+          },
+          "cityStreets": {
+            "n": 23,
+            "avg": 180,
+            "max": 497,
+            "wait": 958,
+            "lag": 29
+          },
+          "cityBuilding": {
+            "n": 14,
+            "avg": 68,
+            "max": 212,
+            "wait": 881,
+            "lag": 86
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 522,
+        "loading": 844,
+        "queued": 0,
+        "upgrading": 133,
+        "buildByTex": {
+          "64": {
+            "n": 56,
+            "avgMs": 2120,
+            "maxMs": 3787,
+            "slowest": "0/10/682/597 U4096 W4866",
+            "vertexMs": 483,
+            "texelMs": 1567,
+            "postMs": 70
+          },
+          "128": {
+            "n": 638,
+            "avgMs": 3068,
+            "maxMs": 6322,
+            "slowest": "0/9/338/301 U16384 W4562",
+            "vertexMs": 445,
+            "texelMs": 2581,
+            "postMs": 42
+          },
+          "256": {
+            "n": 27,
+            "avgMs": 10478,
+            "maxMs": 11869,
+            "slowest": "0/19/349203/305196 U67005 W0",
+            "vertexMs": 547,
+            "texelMs": 9887,
+            "postMs": 44
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": false,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "S08",
+    "name": "08 南台地水阶｜六级库面逐段缩入远方",
+    "file": "shots/final/S08.png",
+    "idle": false,
+    "ms": 345093,
+    "pose": {
+      "lat": -27.978074000000003,
+      "lon": -44.977983,
+      "alt": 2500,
+      "heading": 72.23000000000002,
+      "pitch": -14.999999999999998,
+      "roll": 0,
+      "fov": 35,
+      "lens": 30
+    },
+    "stats": {
+      "fps": 42.588319960884284,
+      "frame": 12703,
+      "calls": 3945,
+      "triangles": 26142024,
+      "geometries": 1344,
+      "textures": 2523,
+      "programs": 59,
+      "heapMB": 429,
+      "workers": {
+        "submitted": 956,
+        "completed": 287,
+        "cancelled": 92,
+        "failed": 0,
+        "pending": 577,
+        "byType": {
+          "buildingTextures": {
+            "n": 2,
+            "avg": 536,
+            "max": 696,
+            "wait": 0,
+            "lag": 586
+          },
+          "terrainTile": {
+            "n": 63,
+            "avg": 3470,
+            "max": 15351,
+            "wait": 16479,
+            "lag": 100
+          },
+          "terrainTiles": {
+            "n": 223,
+            "avg": 9611,
+            "max": 16691,
+            "wait": 60962,
+            "lag": 17
+          },
+          "canals": {
+            "n": 4,
+            "avg": 1,
+            "max": 2,
+            "wait": 795,
+            "lag": 0
+          }
+        }
+      },
+      "city": {
+        "submitted": 536,
+        "completed": 536,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 535,
+            "avg": 14,
+            "max": 899,
+            "wait": 2721,
+            "lag": 7
+          },
+          "cityBridge": {
+            "n": 1,
+            "avg": 4,
+            "max": 4,
+            "wait": 0,
+            "lag": 0
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 702,
+        "loading": 628,
+        "queued": 0,
+        "upgrading": 393,
+        "buildByTex": {
+          "64": {
+            "n": 28,
+            "avgMs": 617,
+            "maxMs": 934,
+            "slowest": "4/7/0/11 U1156 W4267",
+            "vertexMs": 153,
+            "texelMs": 415,
+            "postMs": 48
+          },
+          "128": {
+            "n": 906,
+            "avgMs": 2392,
+            "maxMs": 5095,
+            "slowest": "4/14/22/1492 U16384 W20609",
+            "vertexMs": 364,
+            "texelMs": 2004,
+            "postMs": 24
+          },
+          "256": {
+            "n": 16,
+            "avgMs": 9795,
+            "maxMs": 15351,
+            "slowest": "4/12/4/372 U65536 W60523",
+            "vertexMs": 486,
+            "texelMs": 9264,
+            "postMs": 44
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": false,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "S08b",
+    "name": "08 南台地水阶｜50 mm 中段坝墩与起吊轨",
+    "file": "shots/final/S08b.png",
+    "idle": false,
+    "ms": 334735,
+    "pose": {
+      "lat": -27.914894000000007,
+      "lon": -44.781822999999996,
+      "alt": 743.4999999995343,
+      "heading": 38.89999999999998,
+      "pitch": -1.500000000000003,
+      "roll": 0,
+      "fov": 35,
+      "lens": 50
+    },
+    "stats": {
+      "fps": 44.88129757674002,
+      "frame": 14103,
+      "calls": 2404,
+      "triangles": 17769920,
+      "geometries": 1313,
+      "textures": 2472,
+      "programs": 82,
+      "heapMB": 619,
+      "workers": {
+        "submitted": 724,
+        "completed": 265,
+        "cancelled": 93,
+        "failed": 0,
+        "pending": 366,
+        "byType": {
+          "buildingTextures": {
+            "n": 2,
+            "avg": 587,
+            "max": 868,
+            "wait": 0,
+            "lag": 655
+          },
+          "terrainTile": {
+            "n": 66,
+            "avg": 1210,
+            "max": 3544,
+            "wait": 3091,
+            "lag": 47
+          },
+          "terrainTiles": {
+            "n": 201,
+            "avg": 11465,
+            "max": 18441,
+            "wait": 71036,
+            "lag": 15
+          }
+        }
+      },
+      "city": {
+        "submitted": 831,
+        "completed": 587,
+        "cancelled": 244,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 557,
+            "avg": 9,
+            "max": 765,
+            "wait": 2767,
+            "lag": 8
+          },
+          "cityStreets": {
+            "n": 29,
+            "avg": 36,
+            "max": 191,
+            "wait": 96,
+            "lag": 0
+          },
+          "cityBridge": {
+            "n": 1,
+            "avg": 3,
+            "max": 3,
+            "wait": 0,
+            "lag": 3
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 654,
+        "loading": 1020,
+        "queued": 0,
+        "upgrading": 84,
+        "buildByTex": {
+          "64": {
+            "n": 48,
+            "avgMs": 712,
+            "maxMs": 1083,
+            "slowest": "4/12/8/374 U4096 W6508",
+            "vertexMs": 190,
+            "texelMs": 490,
+            "postMs": 32
+          },
+          "128": {
+            "n": 818,
+            "avgMs": 2860,
+            "maxMs": 5135,
+            "slowest": "4/18/640/24078 U16900 W20609",
+            "vertexMs": 339,
+            "texelMs": 2497,
+            "postMs": 24
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": false,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "S08c",
+    "name": "08 南台地水阶｜90 mm 闸侧格栅",
+    "file": "shots/final/S08c.png",
+    "idle": false,
+    "ms": 336415,
+    "pose": {
+      "lat": -27.911975,
+      "lon": -44.77922100000001,
+      "alt": 738.2000000001863,
+      "heading": 122.00999999999999,
+      "pitch": -47.89,
+      "roll": 0,
+      "fov": 35,
+      "lens": 85
+    },
+    "stats": {
+      "fps": 39.0990530739067,
+      "frame": 15489,
+      "calls": 2025,
+      "triangles": 15164196,
+      "geometries": 925,
+      "textures": 2062,
+      "programs": 77,
+      "heapMB": 566,
+      "workers": {
+        "submitted": 390,
+        "completed": 243,
+        "cancelled": 50,
+        "failed": 0,
+        "pending": 97,
+        "byType": {
+          "buildingTextures": {
+            "n": 2,
+            "avg": 502,
+            "max": 705,
+            "wait": 0,
+            "lag": 646
+          },
+          "terrainTile": {
+            "n": 66,
+            "avg": 1928,
+            "max": 5621,
+            "wait": 4135,
+            "lag": 42
+          },
+          "terrainTiles": {
+            "n": 175,
+            "avg": 12757,
+            "max": 17513,
+            "wait": 75644,
+            "lag": 10
+          }
+        }
+      },
+      "city": {
+        "submitted": 383,
+        "completed": 109,
+        "cancelled": 274,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 76,
+            "avg": 51,
+            "max": 623,
+            "wait": 2050,
+            "lag": 45
+          },
+          "cityStreets": {
+            "n": 32,
+            "avg": 61,
+            "max": 415,
+            "wait": 189,
+            "lag": 3
+          },
+          "cityBridge": {
+            "n": 1,
+            "avg": 11,
+            "max": 11,
+            "wait": 0,
+            "lag": 0
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 576,
+        "loading": 188,
+        "queued": 0,
+        "upgrading": 23,
+        "buildByTex": {
+          "64": {
+            "n": 48,
+            "avgMs": 1387,
+            "maxMs": 2499,
+            "slowest": "4/10/2/94 U4096 W4607",
+            "vertexMs": 355,
+            "texelMs": 971,
+            "postMs": 61
+          },
+          "128": {
+            "n": 718,
+            "avgMs": 3194,
+            "maxMs": 5911,
+            "slowest": "3/3/6/6 U16384 W21",
+            "vertexMs": 363,
+            "texelMs": 2797,
+            "postMs": 34
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": false,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "S09",
+    "name": "09 东海分段潮堤｜黄昏从外海接近主航口",
+    "file": "shots/final/S09.png",
+    "idle": false,
+    "ms": 337763,
+    "pose": {
+      "lat": 0.445302,
+      "lon": 129.894483,
+      "alt": 320,
+      "heading": 62.49000000000001,
+      "pitch": -6.000000000000007,
+      "roll": 0,
+      "fov": 35,
+      "lens": 40
+    },
+    "stats": {
+      "fps": 40.28743121932357,
+      "frame": 10069,
+      "calls": 4151,
+      "triangles": 26098746,
+      "geometries": 2297,
+      "textures": 3046,
+      "programs": 76,
+      "heapMB": 923,
+      "workers": {
+        "submitted": 802,
+        "completed": 377,
+        "cancelled": 55,
+        "failed": 0,
+        "pending": 370,
+        "byType": {
+          "buildingTextures": {
+            "n": 29,
+            "avg": 510,
+            "max": 1648,
+            "wait": 101610,
+            "lag": 100
+          },
+          "terrainTile": {
+            "n": 106,
+            "avg": 3510,
+            "max": 16501,
+            "wait": 4880,
+            "lag": 45
+          },
+          "terrainTiles": {
+            "n": 243,
+            "avg": 8103,
+            "max": 23785,
+            "wait": 72413,
+            "lag": 39
+          }
+        }
+      },
+      "city": {
+        "submitted": 553,
+        "completed": 552,
+        "cancelled": 1,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 523,
+            "avg": 315,
+            "max": 1519,
+            "wait": 13348,
+            "lag": 25
+          },
+          "cityStreets": {
+            "n": 28,
+            "avg": 0,
+            "max": 1,
+            "wait": 6,
+            "lag": 0
+          },
+          "cityBridge": {
+            "n": 1,
+            "avg": 19,
+            "max": 19,
+            "wait": 62,
+            "lag": 6
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 771,
+        "loading": 912,
+        "queued": 0,
+        "upgrading": 142,
+        "buildByTex": {
+          "64": {
+            "n": 36,
+            "avgMs": 852,
+            "maxMs": 2138,
+            "slowest": "0/2/2/2 U4096 W4451",
+            "vertexMs": 165,
+            "texelMs": 631,
+            "postMs": 56
+          },
+          "128": {
+            "n": 990,
+            "avgMs": 2025,
+            "maxMs": 8443,
+            "slowest": "0/9/483/260 U16384 W4498",
+            "vertexMs": 244,
+            "texelMs": 1724,
+            "postMs": 58
+          },
+          "256": {
+            "n": 51,
+            "avgMs": 5868,
+            "maxMs": 16501,
+            "slowest": "0/10/969/519 U65536 W0",
+            "vertexMs": 261,
+            "texelMs": 5554,
+            "postMs": 53
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": false,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "S09b",
+    "name": "09 东海分段潮堤｜跟船穿过航口",
+    "file": "shots/final/S09b.png",
+    "idle": false,
+    "ms": 322005,
+    "pose": {
+      "lat": 0.459424,
+      "lon": 129.937234,
+      "alt": 7,
+      "heading": 12,
+      "pitch": -1.4999999999999976,
+      "roll": 0,
+      "fov": 35,
+      "lens": 35
+    },
+    "stats": {
+      "fps": 20.75581431758389,
+      "frame": 6079,
+      "calls": 5793,
+      "triangles": 63609923,
+      "geometries": 4007,
+      "textures": 7861,
+      "programs": 76,
+      "heapMB": 1505,
+      "workers": {
+        "submitted": 2637,
+        "completed": 1088,
+        "cancelled": 53,
+        "failed": 0,
+        "pending": 1496,
+        "byType": {
+          "buildingTextures": {
+            "n": 29,
+            "avg": 91,
+            "max": 378,
+            "wait": 21837,
+            "lag": 132
+          },
+          "terrainTile": {
+            "n": 290,
+            "avg": 1882,
+            "max": 12146,
+            "wait": 15882,
+            "lag": 101
+          },
+          "terrainTiles": {
+            "n": 769,
+            "avg": 2288,
+            "max": 12017,
+            "wait": 59214,
+            "lag": 79
+          }
+        }
+      },
+      "city": {
+        "submitted": 556,
+        "completed": 556,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 525,
+            "avg": 62,
+            "max": 229,
+            "wait": 5670,
+            "lag": 36
+          },
+          "cityStreets": {
+            "n": 30,
+            "avg": 0,
+            "max": 1,
+            "wait": 10,
+            "lag": 0
+          },
+          "cityBridge": {
+            "n": 1,
+            "avg": 40,
+            "max": 40,
+            "wait": 20,
+            "lag": 0
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 2358,
+        "loading": 1040,
+        "queued": 0,
+        "upgrading": 1236,
+        "buildByTex": {
+          "64": {
+            "n": 48,
+            "avgMs": 260,
+            "maxMs": 686,
+            "slowest": "0/2/2/2 U4096 W4451",
+            "vertexMs": 68,
+            "texelMs": 180,
+            "postMs": 12
+          },
+          "128": {
+            "n": 3094,
+            "avgMs": 573,
+            "maxMs": 3905,
+            "slowest": "0/11/1941/1056 U16384 W0",
+            "vertexMs": 88,
+            "texelMs": 472,
+            "postMs": 12
+          },
+          "256": {
+            "n": 195,
+            "avgMs": 2073,
+            "maxMs": 12146,
+            "slowest": "0/10/972/528 U65536 W0",
+            "vertexMs": 89,
+            "texelMs": 1966,
+            "postMs": 18
+          },
+          "512": {
+            "n": 29,
+            "avgMs": 3984,
+            "maxMs": 12085,
+            "slowest": "0/14/15464/8304 U264196 W4225",
+            "vertexMs": 45,
+            "texelMs": 3899,
+            "postMs": 40
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": false,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "S09c",
+    "name": "09 东海分段潮堤｜港务工作间窗外的航口",
+    "file": "shots/final/S09c.png",
+    "idle": false,
+    "ms": 324826,
+    "pose": {
+      "lat": 0.47150200000000003,
+      "lon": 129.934366,
+      "alt": 27.600000000093132,
+      "heading": 129.01999999999998,
+      "pitch": -4.0000000000000036,
+      "roll": 0,
+      "fov": 35,
+      "lens": 24
+    },
+    "stats": {
+      "fps": 33.39620888260487,
+      "frame": 9926,
+      "calls": 6169,
+      "triangles": 32953633,
+      "geometries": 3390,
+      "textures": 4878,
+      "programs": 82,
+      "heapMB": 1307,
+      "workers": {
+        "submitted": 1490,
+        "completed": 1011,
+        "cancelled": 100,
+        "failed": 0,
+        "pending": 379,
+        "byType": {
+          "buildingTextures": {
+            "n": 29,
+            "avg": 234,
+            "max": 752,
+            "wait": 48787,
+            "lag": 61
+          },
+          "terrainTile": {
+            "n": 574,
+            "avg": 2033,
+            "max": 8087,
+            "wait": 37409,
+            "lag": 34
+          },
+          "terrainTiles": {
+            "n": 408,
+            "avg": 2976,
+            "max": 10124,
+            "wait": 50678,
+            "lag": 24
+          }
+        }
+      },
+      "city": {
+        "submitted": 616,
+        "completed": 616,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 585,
+            "avg": 3,
+            "max": 253,
+            "wait": 1736,
+            "lag": 11
+          },
+          "cityStreets": {
+            "n": 31,
+            "avg": 0,
+            "max": 1,
+            "wait": 1,
+            "lag": 0
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 1275,
+        "loading": 0,
+        "queued": 0,
+        "upgrading": 379,
+        "buildByTex": {
+          "64": {
+            "n": 48,
+            "avgMs": 418,
+            "maxMs": 1444,
+            "slowest": "0/2/2/2 U4096 W4451",
+            "vertexMs": 100,
+            "texelMs": 294,
+            "postMs": 24
+          },
+          "128": {
+            "n": 1650,
+            "avgMs": 750,
+            "maxMs": 3176,
+            "slowest": "3/3/4/0 U16384 W5",
+            "vertexMs": 92,
+            "texelMs": 640,
+            "postMs": 18
+          },
+          "256": {
+            "n": 473,
+            "avgMs": 1880,
+            "maxMs": 7298,
+            "slowest": "0/10/969/519 U65536 W0",
+            "vertexMs": 74,
+            "texelMs": 1783,
+            "postMs": 23
+          },
+          "512": {
+            "n": 35,
+            "avgMs": 6674,
+            "maxMs": 8087,
+            "slowest": "0/17/123697/66430 U264196 W4225",
+            "vertexMs": 59,
+            "texelMs": 6554,
+            "postMs": 60
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": false,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "S09d",
+    "name": "09 东海分段潮堤｜回望：堤身遮住一段外海",
+    "file": "shots/final/S09d.png",
+    "idle": false,
+    "ms": 329424,
+    "pose": {
+      "lat": 0.4788450000000001,
+      "lon": 129.947411,
+      "alt": 7,
+      "heading": 212,
+      "pitch": -1.000000000000002,
+      "roll": 0,
+      "fov": 35,
+      "lens": 28
+    },
+    "stats": {
+      "fps": 45.97866301553536,
+      "frame": 11565,
+      "calls": 3887,
+      "triangles": 23592876,
+      "geometries": 2387,
+      "textures": 3885,
+      "programs": 81,
+      "heapMB": 1303,
+      "workers": {
+        "submitted": 1127,
+        "completed": 1058,
+        "cancelled": 47,
+        "failed": 0,
+        "pending": 22,
+        "byType": {
+          "buildingTextures": {
+            "n": 29,
+            "avg": 177,
+            "max": 772,
+            "wait": 46058,
+            "lag": 58
+          },
+          "terrainTile": {
+            "n": 703,
+            "avg": 2109,
+            "max": 10744,
+            "wait": 35016,
+            "lag": 31
+          },
+          "terrainTiles": {
+            "n": 326,
+            "avg": 2690,
+            "max": 10291,
+            "wait": 58281,
+            "lag": 18
+          }
+        }
+      },
+      "city": {
+        "submitted": 520,
+        "completed": 520,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 520,
+            "avg": 2,
+            "max": 175,
+            "wait": 1261,
+            "lag": 5
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 1032,
+        "loading": 0,
+        "queued": 0,
+        "upgrading": 22,
+        "buildByTex": {
+          "64": {
+            "n": 52,
+            "avgMs": 340,
+            "maxMs": 1382,
+            "slowest": "0/2/2/2 U4096 W4451",
+            "vertexMs": 78,
+            "texelMs": 248,
+            "postMs": 14
+          },
+          "128": {
+            "n": 1345,
+            "avgMs": 684,
+            "maxMs": 3894,
+            "slowest": "3/3/7/2 U16384 W4243",
+            "vertexMs": 80,
+            "texelMs": 586,
+            "postMs": 18
+          },
+          "256": {
+            "n": 538,
+            "avgMs": 1601,
+            "maxMs": 3112,
+            "slowest": "0/17/123711/66442 U66564 W4225",
+            "vertexMs": 69,
+            "texelMs": 1509,
+            "postMs": 22
+          },
+          "512": {
+            "n": 72,
+            "avgMs": 7783,
+            "maxMs": 10744,
+            "slowest": "0/18/247424/132888 U264196 W4225",
+            "vertexMs": 89,
+            "texelMs": 7614,
+            "postMs": 80
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": false,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "TE0",
+    "name": "转台 中央经线 +0°",
+    "file": "shots/final/TE0.png",
+    "idle": true,
+    "ms": 90699,
+    "pose": {
+      "lat": 0,
+      "lon": 0,
+      "alt": 17900000,
+      "heading": 0,
+      "pitch": -90,
+      "roll": 0,
+      "fov": 35,
+      "lens": 50
+    },
+    "stats": {
+      "fps": 56.23958434690078,
+      "frame": 5206,
+      "calls": 347,
+      "triangles": 2421886,
+      "geometries": 430,
+      "textures": 1259,
+      "programs": 18,
+      "heapMB": 418,
+      "workers": {
+        "submitted": 359,
+        "completed": 359,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "buildingTextures": {
+            "n": 29,
+            "avg": 147,
+            "max": 478,
+            "wait": 8028,
+            "lag": 36
+          },
+          "terrainTile": {
+            "n": 238,
+            "avg": 1940,
+            "max": 4833,
+            "wait": 34950,
+            "lag": 5
+          },
+          "terrainTiles": {
+            "n": 92,
+            "avg": 2481,
+            "max": 4946,
+            "wait": 13988,
+            "lag": 0
+          }
+        }
+      },
+      "city": {
+        "submitted": 0,
+        "completed": 0,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {}
+      },
+      "terrain": {
+        "drawn": 288,
+        "loading": 0,
+        "queued": 0,
+        "upgrading": 0,
+        "buildByTex": {
+          "128": {
+            "n": 382,
+            "avgMs": 643,
+            "maxMs": 1954,
+            "slowest": "0/0/0/0 U4356 W5186",
+            "vertexMs": 44,
+            "texelMs": 578,
+            "postMs": 21
+          },
+          "256": {
+            "n": 224,
+            "avgMs": 1984,
+            "maxMs": 4833,
+            "slowest": "3/2/1/0 U65536 W4254",
+            "vertexMs": 39,
+            "texelMs": 1877,
+            "postMs": 67
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": true,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "TE90",
+    "name": "转台 中央经线 +90°",
+    "file": "shots/final/TE90.png",
+    "idle": true,
+    "ms": 100350,
+    "pose": {
+      "lat": 0,
+      "lon": 90,
+      "alt": 17900000,
+      "heading": 0,
+      "pitch": -90,
+      "roll": 0,
+      "fov": 35,
+      "lens": 50
+    },
+    "stats": {
+      "fps": 49.44219686481623,
+      "frame": 5799,
+      "calls": 375,
+      "triangles": 2599510,
+      "geometries": 447,
+      "textures": 1279,
+      "programs": 18,
+      "heapMB": 435,
+      "workers": {
+        "submitted": 356,
+        "completed": 356,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "buildingTextures": {
+            "n": 29,
+            "avg": 172,
+            "max": 716,
+            "wait": 5412,
+            "lag": 51
+          },
+          "terrainTile": {
+            "n": 234,
+            "avg": 2163,
+            "max": 5587,
+            "wait": 39022,
+            "lag": 3
+          },
+          "terrainTiles": {
+            "n": 93,
+            "avg": 2812,
+            "max": 5357,
+            "wait": 15377,
+            "lag": 0
+          }
+        }
+      },
+      "city": {
+        "submitted": 0,
+        "completed": 0,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {}
+      },
+      "terrain": {
+        "drawn": 288,
+        "loading": 0,
+        "queued": 0,
+        "upgrading": 0,
+        "buildByTex": {
+          "128": {
+            "n": 382,
+            "avgMs": 727,
+            "maxMs": 2165,
+            "slowest": "0/0/0/0 U4356 W5186",
+            "vertexMs": 48,
+            "texelMs": 658,
+            "postMs": 22
+          },
+          "256": {
+            "n": 224,
+            "avgMs": 2187,
+            "maxMs": 5587,
+            "slowest": "3/2/1/0 U65536 W4254",
+            "vertexMs": 43,
+            "texelMs": 2074,
+            "postMs": 71
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": true,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "TE180",
+    "name": "转台 中央经线 +180°",
+    "file": "shots/final/TE180.png",
+    "idle": true,
+    "ms": 86112,
+    "pose": {
+      "lat": 0,
+      "lon": 180,
+      "alt": 17900000,
+      "heading": 0,
+      "pitch": -90,
+      "roll": 0,
+      "fov": 35,
+      "lens": 50
+    },
+    "stats": {
+      "fps": 51.19667173273547,
+      "frame": 4960,
+      "calls": 362,
+      "triangles": 2483013,
+      "geometries": 444,
+      "textures": 1269,
+      "programs": 18,
+      "heapMB": 425,
+      "workers": {
+        "submitted": 359,
+        "completed": 359,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "buildingTextures": {
+            "n": 29,
+            "avg": 131,
+            "max": 464,
+            "wait": 7510,
+            "lag": 45
+          },
+          "terrainTile": {
+            "n": 238,
+            "avg": 1851,
+            "max": 3699,
+            "wait": 31651,
+            "lag": 3
+          },
+          "terrainTiles": {
+            "n": 92,
+            "avg": 2364,
+            "max": 4933,
+            "wait": 12601,
+            "lag": 1
+          }
+        }
+      },
+      "city": {
+        "submitted": 0,
+        "completed": 0,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {}
+      },
+      "terrain": {
+        "drawn": 288,
+        "loading": 0,
+        "queued": 0,
+        "upgrading": 0,
+        "buildByTex": {
+          "128": {
+            "n": 382,
+            "avgMs": 619,
+            "maxMs": 2313,
+            "slowest": "0/0/0/0 U4356 W5186",
+            "vertexMs": 41,
+            "texelMs": 557,
+            "postMs": 20
+          },
+          "256": {
+            "n": 224,
+            "avgMs": 1882,
+            "maxMs": 3699,
+            "slowest": "4/2/1/2 U65536 W0",
+            "vertexMs": 37,
+            "texelMs": 1784,
+            "postMs": 61
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": true,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "TW90",
+    "name": "转台 中央经线 -90°",
+    "file": "shots/final/TW90.png",
+    "idle": true,
+    "ms": 85119,
+    "pose": {
+      "lat": 0,
+      "lon": -90,
+      "alt": 17900000,
+      "heading": 0,
+      "pitch": -90,
+      "roll": 0,
+      "fov": 35,
+      "lens": 50
+    },
+    "stats": {
+      "fps": 61.71697335489127,
+      "frame": 4891,
+      "calls": 348,
+      "triangles": 2374741,
+      "geometries": 427,
+      "textures": 1259,
+      "programs": 18,
+      "heapMB": 409,
+      "workers": {
+        "submitted": 359,
+        "completed": 359,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "buildingTextures": {
+            "n": 29,
+            "avg": 142,
+            "max": 737,
+            "wait": 7440,
+            "lag": 46
+          },
+          "terrainTile": {
+            "n": 238,
+            "avg": 1816,
+            "max": 3828,
+            "wait": 31101,
+            "lag": 2
+          },
+          "terrainTiles": {
+            "n": 92,
+            "avg": 2351,
+            "max": 4207,
+            "wait": 12455,
+            "lag": 0
+          }
+        }
+      },
+      "city": {
+        "submitted": 0,
+        "completed": 0,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {}
+      },
+      "terrain": {
+        "drawn": 288,
+        "loading": 0,
+        "queued": 0,
+        "upgrading": 0,
+        "buildByTex": {
+          "128": {
+            "n": 382,
+            "avgMs": 619,
+            "maxMs": 2412,
+            "slowest": "0/0/0/0 U4356 W5186",
+            "vertexMs": 42,
+            "texelMs": 558,
+            "postMs": 19
+          },
+          "256": {
+            "n": 224,
+            "avgMs": 1839,
+            "maxMs": 3828,
+            "slowest": "0/2/3/3 U65536 W0",
+            "vertexMs": 38,
+            "texelMs": 1738,
+            "postMs": 63
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": true,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "C01",
+    "name": "验收｜区级 ZR1 公共塔与主站 1 km",
+    "file": "shots/final/C01.png",
+    "idle": false,
+    "ms": 309594,
+    "pose": {
+      "lat": 22.264575999999998,
+      "lon": 117.93281100000002,
+      "alt": 693.0000000004657,
+      "heading": 0,
+      "pitch": 4.999999999999998,
+      "roll": 0,
+      "fov": 35,
+      "lens": 35
+    },
+    "stats": {
+      "fps": 45.60950127064481,
+      "frame": 4377,
+      "calls": 2002,
+      "triangles": 128811152,
+      "geometries": 1284,
+      "textures": 3718,
+      "programs": 90,
+      "heapMB": 1369,
+      "workers": {
+        "submitted": 747,
+        "completed": 665,
+        "cancelled": 23,
+        "failed": 0,
+        "pending": 59,
+        "byType": {
+          "terrainTile": {
+            "n": 419,
+            "avg": 1756,
+            "max": 14062,
+            "wait": 34505,
+            "lag": 129
+          },
+          "terrainTiles": {
+            "n": 217,
+            "avg": 1719,
+            "max": 4237,
+            "wait": 50666,
+            "lag": 171
+          },
+          "buildingTextures": {
+            "n": 29,
+            "avg": 90,
+            "max": 306,
+            "wait": 39039,
+            "lag": 79
+          }
+        }
+      },
+      "city": {
+        "submitted": 861,
+        "completed": 861,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 523,
+            "avg": 56,
+            "max": 823,
+            "wait": 46663,
+            "lag": 120
+          },
+          "cityBuilding": {
+            "n": 311,
+            "avg": 108,
+            "max": 3204,
+            "wait": 2329,
+            "lag": 187
+          },
+          "cityStreets": {
+            "n": 27,
+            "avg": 164,
+            "max": 246,
+            "wait": 4596,
+            "lag": 69
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 693,
+        "loading": 0,
+        "queued": 0,
+        "upgrading": 59,
+        "buildByTex": {
+          "64": {
+            "n": 36,
+            "avgMs": 271,
+            "maxMs": 1134,
+            "slowest": "0/2/2/2 U4096 W4451",
+            "vertexMs": 45,
+            "texelMs": 214,
+            "postMs": 12
+          },
+          "128": {
+            "n": 904,
+            "avgMs": 440,
+            "maxMs": 1379,
+            "slowest": "0/11/1660/1597 U16384 W0",
+            "vertexMs": 34,
+            "texelMs": 393,
+            "postMs": 13
+          },
+          "256": {
+            "n": 276,
+            "avgMs": 1270,
+            "maxMs": 4542,
+            "slowest": "0/10/832/801 U65536 W0",
+            "vertexMs": 29,
+            "texelMs": 1225,
+            "postMs": 16
+          },
+          "512": {
+            "n": 71,
+            "avgMs": 4942,
+            "maxMs": 14062,
+            "slowest": "0/9/412/400 U262144 W0",
+            "vertexMs": 28,
+            "texelMs": 4853,
+            "postMs": 62
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": false,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "C02",
+    "name": "验收｜区级 ZR1 地面站 S9ruz39h.4 1 km",
+    "file": "shots/final/C02.png",
+    "idle": false,
+    "ms": 315592,
+    "pose": {
+      "lat": 21.887337000000002,
+      "lon": 118.00153199999998,
+      "alt": 692,
+      "heading": 193.66999999999996,
+      "pitch": -8.499999999999996,
+      "roll": 0,
+      "fov": 35,
+      "lens": 50
+    },
+    "stats": {
+      "fps": 49.03216332306481,
+      "frame": 2998,
+      "calls": 2307,
+      "triangles": 124815651,
+      "geometries": 1651,
+      "textures": 5102,
+      "programs": 100,
+      "heapMB": 1139,
+      "workers": {
+        "submitted": 1211,
+        "completed": 770,
+        "cancelled": 34,
+        "failed": 0,
+        "pending": 407,
+        "byType": {
+          "terrainTile": {
+            "n": 388,
+            "avg": 1311,
+            "max": 5254,
+            "wait": 15659,
+            "lag": 129
+          },
+          "terrainTiles": {
+            "n": 353,
+            "avg": 1668,
+            "max": 3552,
+            "wait": 61624,
+            "lag": 168
+          },
+          "buildingTextures": {
+            "n": 29,
+            "avg": 83,
+            "max": 283,
+            "wait": 46309,
+            "lag": 193
+          }
+        }
+      },
+      "city": {
+        "submitted": 1619,
+        "completed": 1619,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 455,
+            "avg": 61,
+            "max": 515,
+            "wait": 84516,
+            "lag": 240
+          },
+          "cityStreets": {
+            "n": 28,
+            "avg": 169,
+            "max": 502,
+            "wait": 6148,
+            "lag": 141
+          },
+          "cityBuilding": {
+            "n": 1136,
+            "avg": 21,
+            "max": 248,
+            "wait": 1569,
+            "lag": 92
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 1104,
+        "loading": 260,
+        "queued": 3,
+        "upgrading": 345,
+        "buildByTex": {
+          "64": {
+            "n": 40,
+            "avgMs": 443,
+            "maxMs": 1579,
+            "slowest": "0/4/13/12 U4096 W0",
+            "vertexMs": 64,
+            "texelMs": 359,
+            "postMs": 21
+          },
+          "128": {
+            "n": 1430,
+            "avgMs": 420,
+            "maxMs": 1363,
+            "slowest": "0/3/6/5 U16384 W4229",
+            "vertexMs": 44,
+            "texelMs": 365,
+            "postMs": 12
+          },
+          "256": {
+            "n": 296,
+            "avgMs": 1235,
+            "maxMs": 3895,
+            "slowest": "0/10/825/782 U65536 W0",
+            "vertexMs": 32,
+            "texelMs": 1186,
+            "postMs": 16
+          },
+          "512": {
+            "n": 31,
+            "avgMs": 3388,
+            "maxMs": 5060,
+            "slowest": "0/16/53155/50575 U264821 W0",
+            "vertexMs": 52,
+            "texelMs": 3288,
+            "postMs": 49
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": false,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "C03",
+    "name": "验收｜街级 S9ruz39h.4 站前人眼高度（白天）",
+    "file": "shots/final/C03.png",
+    "idle": false,
+    "ms": 316086,
+    "pose": {
+      "lat": 21.871897999999998,
+      "lon": 117.997485,
+      "alt": 544.0000000004657,
+      "heading": 193.66999999999996,
+      "pitch": 7.999999999999996,
+      "roll": 0,
+      "fov": 35,
+      "lens": 28
+    },
+    "stats": {
+      "fps": 55.30368694305152,
+      "frame": 2997,
+      "calls": 2890,
+      "triangles": 141599265,
+      "geometries": 1631,
+      "textures": 4710,
+      "programs": 104,
+      "heapMB": 1225,
+      "workers": {
+        "submitted": 1049,
+        "completed": 751,
+        "cancelled": 41,
+        "failed": 0,
+        "pending": 257,
+        "byType": {
+          "terrainTile": {
+            "n": 424,
+            "avg": 1364,
+            "max": 6366,
+            "wait": 15771,
+            "lag": 206
+          },
+          "terrainTiles": {
+            "n": 298,
+            "avg": 1567,
+            "max": 4142,
+            "wait": 59956,
+            "lag": 194
+          },
+          "buildingTextures": {
+            "n": 29,
+            "avg": 85,
+            "max": 329,
+            "wait": 57018,
+            "lag": 178
+          }
+        }
+      },
+      "city": {
+        "submitted": 1600,
+        "completed": 1595,
+        "cancelled": 5,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 524,
+            "avg": 64,
+            "max": 566,
+            "wait": 91836,
+            "lag": 214
+          },
+          "cityBuilding": {
+            "n": 1045,
+            "avg": 29,
+            "max": 621,
+            "wait": 1674,
+            "lag": 121
+          },
+          "cityStreets": {
+            "n": 26,
+            "avg": 143,
+            "max": 261,
+            "wait": 12060,
+            "lag": 178
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 948,
+        "loading": 96,
+        "queued": 4,
+        "upgrading": 234,
+        "buildByTex": {
+          "64": {
+            "n": 56,
+            "avgMs": 342,
+            "maxMs": 1103,
+            "slowest": "0/2/2/2 U4096 W4451",
+            "vertexMs": 60,
+            "texelMs": 269,
+            "postMs": 13
+          },
+          "128": {
+            "n": 1206,
+            "avgMs": 394,
+            "maxMs": 1368,
+            "slowest": "0/1/1/1 U4356 W4531",
+            "vertexMs": 39,
+            "texelMs": 343,
+            "postMs": 12
+          },
+          "256": {
+            "n": 283,
+            "avgMs": 1144,
+            "maxMs": 3705,
+            "slowest": "0/10/829/785 U65536 W0",
+            "vertexMs": 29,
+            "texelMs": 1099,
+            "postMs": 15
+          },
+          "512": {
+            "n": 67,
+            "avgMs": 3354,
+            "maxMs": 6366,
+            "slowest": "0/7/104/95 U262144 W0",
+            "vertexMs": 25,
+            "texelMs": 3290,
+            "postMs": 39
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": false,
+        "clouds": true,
+        "terrain": false,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "C04",
+    "name": "验收｜街级 S9ruz39h.4 站前人眼高度（21:30）",
+    "file": "shots/final/C04.png",
+    "idle": false,
+    "ms": 313979,
+    "pose": {
+      "lat": 21.871897999999998,
+      "lon": 117.997485,
+      "alt": 544.0000000004657,
+      "heading": 193.66999999999996,
+      "pitch": 7.999999999999996,
+      "roll": 0,
+      "fov": 35,
+      "lens": 28
+    },
+    "stats": {
+      "fps": 51.36380870654376,
+      "frame": 3263,
+      "calls": 1324,
+      "triangles": 63425991,
+      "geometries": 1490,
+      "textures": 4530,
+      "programs": 93,
+      "heapMB": 1360,
+      "workers": {
+        "submitted": 1069,
+        "completed": 779,
+        "cancelled": 43,
+        "failed": 0,
+        "pending": 247,
+        "byType": {
+          "terrainTile": {
+            "n": 448,
+            "avg": 1343,
+            "max": 10260,
+            "wait": 16313,
+            "lag": 168
+          },
+          "terrainTiles": {
+            "n": 302,
+            "avg": 1515,
+            "max": 3552,
+            "wait": 59771,
+            "lag": 220
+          },
+          "buildingTextures": {
+            "n": 29,
+            "avg": 83,
+            "max": 312,
+            "wait": 57469,
+            "lag": 194
+          }
+        }
+      },
+      "city": {
+        "submitted": 1610,
+        "completed": 1604,
+        "cancelled": 6,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 524,
+            "avg": 59,
+            "max": 442,
+            "wait": 82126,
+            "lag": 195
+          },
+          "cityBuilding": {
+            "n": 1054,
+            "avg": 28,
+            "max": 410,
+            "wait": 1454,
+            "lag": 104
+          },
+          "cityStreets": {
+            "n": 26,
+            "avg": 150,
+            "max": 449,
+            "wait": 10350,
+            "lag": 134
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 963,
+        "loading": 80,
+        "queued": 1,
+        "upgrading": 228,
+        "buildByTex": {
+          "64": {
+            "n": 56,
+            "avgMs": 334,
+            "maxMs": 886,
+            "slowest": "0/4/12/12 U4096 W0",
+            "vertexMs": 52,
+            "texelMs": 267,
+            "postMs": 15
+          },
+          "128": {
+            "n": 1226,
+            "avgMs": 381,
+            "maxMs": 1282,
+            "slowest": "0/3/5/4 U16384 W5388",
+            "vertexMs": 37,
+            "texelMs": 333,
+            "postMs": 11
+          },
+          "256": {
+            "n": 301,
+            "avgMs": 1098,
+            "maxMs": 3234,
+            "slowest": "0/10/832/786 U65536 W0",
+            "vertexMs": 29,
+            "texelMs": 1055,
+            "postMs": 15
+          },
+          "512": {
+            "n": 72,
+            "avgMs": 3337,
+            "maxMs": 10260,
+            "slowest": "0/9/412/392 U262144 W0",
+            "vertexMs": 25,
+            "texelMs": 3271,
+            "postMs": 41
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": false,
+        "clouds": true,
+        "terrain": false,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "C05",
+    "name": "验收｜街级 公共塔前广场",
+    "file": "shots/final/C05.png",
+    "idle": true,
+    "ms": 190441,
+    "pose": {
+      "lat": 22.280888,
+      "lon": 117.93281100000002,
+      "alt": 446.34810179146007,
+      "heading": 0,
+      "pitch": 38.00000000000001,
+      "roll": 0,
+      "fov": 35,
+      "lens": 20
+    },
+    "stats": {
+      "fps": 43.05828182724157,
+      "frame": 3820,
+      "calls": 2266,
+      "triangles": 129981023,
+      "geometries": 873,
+      "textures": 3158,
+      "programs": 103,
+      "heapMB": 1111,
+      "workers": {
+        "submitted": 554,
+        "completed": 514,
+        "cancelled": 40,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "buildingTextures": {
+            "n": 29,
+            "avg": 179,
+            "max": 766,
+            "wait": 42626,
+            "lag": 113
+          },
+          "terrainTile": {
+            "n": 287,
+            "avg": 2948,
+            "max": 19036,
+            "wait": 23370,
+            "lag": 43
+          },
+          "terrainTiles": {
+            "n": 199,
+            "avg": 2624,
+            "max": 11115,
+            "wait": 27390,
+            "lag": 64
+          }
+        }
+      },
+      "city": {
+        "submitted": 312,
+        "completed": 312,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 61,
+            "avg": 262,
+            "max": 796,
+            "wait": 17948,
+            "lag": 163
+          },
+          "cityBuilding": {
+            "n": 226,
+            "avg": 272,
+            "max": 6565,
+            "wait": 2486,
+            "lag": 91
+          },
+          "cityStreets": {
+            "n": 25,
+            "avg": 449,
+            "max": 1133,
+            "wait": 7333,
+            "lag": 117
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 654,
+        "loading": 0,
+        "queued": 0,
+        "upgrading": 0,
+        "buildByTex": {
+          "64": {
+            "n": 56,
+            "avgMs": 751,
+            "maxMs": 2227,
+            "slowest": "0/2/2/2 U4096 W4451",
+            "vertexMs": 107,
+            "texelMs": 616,
+            "postMs": 29
+          },
+          "128": {
+            "n": 843,
+            "avgMs": 675,
+            "maxMs": 3585,
+            "slowest": "0/3/6/5 U16384 W4229",
+            "vertexMs": 55,
+            "texelMs": 600,
+            "postMs": 21
+          },
+          "256": {
+            "n": 106,
+            "avgMs": 1902,
+            "maxMs": 4664,
+            "slowest": "0/10/827/796 U65536 W0",
+            "vertexMs": 42,
+            "texelMs": 1840,
+            "postMs": 20
+          },
+          "512": {
+            "n": 77,
+            "avgMs": 7194,
+            "maxMs": 19036,
+            "slowest": "0/9/412/399 U262144 W0",
+            "vertexMs": 43,
+            "texelMs": 7080,
+            "postMs": 71
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": true,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "C06",
+    "name": "验收｜建筑四面 S07 住宅正立面（西）",
+    "file": "shots/final/C06.png",
+    "idle": true,
+    "ms": 124638,
+    "pose": {
+      "lat": 22.218494699999997,
+      "lon": 118.2539874,
+      "alt": 512.5300000002608,
+      "heading": 81.24000000000001,
+      "pitch": -40.00000000000001,
+      "roll": 0,
+      "fov": 35,
+      "lens": 28
+    },
+    "stats": {
+      "fps": 42.712643681048455,
+      "frame": 3491,
+      "calls": 2600,
+      "triangles": 40391960,
+      "geometries": 892,
+      "textures": 3716,
+      "programs": 103,
+      "heapMB": 778,
+      "workers": {
+        "submitted": 504,
+        "completed": 476,
+        "cancelled": 28,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "buildingTextures": {
+            "n": 29,
+            "avg": 176,
+            "max": 602,
+            "wait": 39889,
+            "lag": 113
+          },
+          "terrainTile": {
+            "n": 198,
+            "avg": 1455,
+            "max": 5454,
+            "wait": 13027,
+            "lag": 42
+          },
+          "terrainTiles": {
+            "n": 249,
+            "avg": 2455,
+            "max": 6837,
+            "wait": 31759,
+            "lag": 24
+          }
+        }
+      },
+      "city": {
+        "submitted": 136,
+        "completed": 136,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 39,
+            "avg": 280,
+            "max": 668,
+            "wait": 5469,
+            "lag": 52
+          },
+          "cityBuilding": {
+            "n": 70,
+            "avg": 96,
+            "max": 677,
+            "wait": 839,
+            "lag": 31
+          },
+          "cityStreets": {
+            "n": 27,
+            "avg": 393,
+            "max": 939,
+            "wait": 1631,
+            "lag": 37
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 795,
+        "loading": 0,
+        "queued": 0,
+        "upgrading": 0,
+        "buildByTex": {
+          "64": {
+            "n": 44,
+            "avgMs": 802,
+            "maxMs": 2468,
+            "slowest": "0/2/2/2 U4096 W4451",
+            "vertexMs": 100,
+            "texelMs": 668,
+            "postMs": 33
+          },
+          "128": {
+            "n": 1038,
+            "avgMs": 636,
+            "maxMs": 3029,
+            "slowest": "0/0/0/0 U4356 W5186",
+            "vertexMs": 48,
+            "texelMs": 570,
+            "postMs": 19
+          },
+          "256": {
+            "n": 95,
+            "avgMs": 1282,
+            "maxMs": 1573,
+            "slowest": "0/18/213371/203538 U66733 W0",
+            "vertexMs": 43,
+            "texelMs": 1224,
+            "postMs": 15
+          },
+          "512": {
+            "n": 17,
+            "avgMs": 4811,
+            "maxMs": 5454,
+            "slowest": "0/16/53345/50886 U264821 W0",
+            "vertexMs": 41,
+            "texelMs": 4718,
+            "postMs": 52
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": true,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "C07",
+    "name": "验收｜建筑四面 S07 住宅侧立面（北）",
+    "file": "shots/final/C07.png",
+    "idle": true,
+    "ms": 118748,
+    "pose": {
+      "lat": 22.219555199999995,
+      "lon": 118.254827,
+      "alt": 512.5300000002608,
+      "heading": 171.24,
+      "pitch": -40.00000000000001,
+      "roll": 0,
+      "fov": 35,
+      "lens": 28
+    },
+    "stats": {
+      "fps": 48.1920853840777,
+      "frame": 3394,
+      "calls": 2215,
+      "triangles": 35088920,
+      "geometries": 880,
+      "textures": 3752,
+      "programs": 103,
+      "heapMB": 832,
+      "workers": {
+        "submitted": 524,
+        "completed": 493,
+        "cancelled": 31,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "buildingTextures": {
+            "n": 29,
+            "avg": 186,
+            "max": 859,
+            "wait": 41328,
+            "lag": 121
+          },
+          "terrainTile": {
+            "n": 210,
+            "avg": 1365,
+            "max": 5046,
+            "wait": 10470,
+            "lag": 33
+          },
+          "terrainTiles": {
+            "n": 254,
+            "avg": 2300,
+            "max": 6458,
+            "wait": 30694,
+            "lag": 21
+          }
+        }
+      },
+      "city": {
+        "submitted": 123,
+        "completed": 123,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 40,
+            "avg": 258,
+            "max": 639,
+            "wait": 5079,
+            "lag": 43
+          },
+          "cityStreets": {
+            "n": 27,
+            "avg": 381,
+            "max": 824,
+            "wait": 1724,
+            "lag": 10
+          },
+          "cityBuilding": {
+            "n": 56,
+            "avg": 122,
+            "max": 617,
+            "wait": 990,
+            "lag": 48
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 810,
+        "loading": 0,
+        "queued": 0,
+        "upgrading": 0,
+        "buildByTex": {
+          "64": {
+            "n": 44,
+            "avgMs": 754,
+            "maxMs": 2150,
+            "slowest": "0/2/2/2 U4096 W4451",
+            "vertexMs": 101,
+            "texelMs": 625,
+            "postMs": 28
+          },
+          "128": {
+            "n": 1057,
+            "avgMs": 598,
+            "maxMs": 2960,
+            "slowest": "0/0/0/0 U4356 W5186",
+            "vertexMs": 45,
+            "texelMs": 536,
+            "postMs": 17
+          },
+          "256": {
+            "n": 110,
+            "avgMs": 1244,
+            "maxMs": 1714,
+            "slowest": "0/18/213368/203534 U66733 W0",
+            "vertexMs": 37,
+            "texelMs": 1192,
+            "postMs": 14
+          },
+          "512": {
+            "n": 15,
+            "avgMs": 4624,
+            "maxMs": 5046,
+            "slowest": "0/16/53345/50881 U264821 W0",
+            "vertexMs": 36,
+            "texelMs": 4541,
+            "postMs": 47
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": true,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "C08",
+    "name": "验收｜建筑四面 S07 住宅背立面（东）",
+    "file": "shots/final/C08.png",
+    "idle": true,
+    "ms": 122921,
+    "pose": {
+      "lat": 22.2187779,
+      "lon": 118.2559726,
+      "alt": 512.5299999997951,
+      "heading": 261.24,
+      "pitch": -39.99999999999999,
+      "roll": 0,
+      "fov": 35,
+      "lens": 28
+    },
+    "stats": {
+      "fps": 44.18210725193056,
+      "frame": 3318,
+      "calls": 1887,
+      "triangles": 32449984,
+      "geometries": 826,
+      "textures": 3675,
+      "programs": 100,
+      "heapMB": 828,
+      "workers": {
+        "submitted": 531,
+        "completed": 504,
+        "cancelled": 27,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "buildingTextures": {
+            "n": 29,
+            "avg": 147,
+            "max": 465,
+            "wait": 41465,
+            "lag": 146
+          },
+          "terrainTile": {
+            "n": 226,
+            "avg": 1407,
+            "max": 5114,
+            "wait": 10497,
+            "lag": 39
+          },
+          "terrainTiles": {
+            "n": 249,
+            "avg": 2312,
+            "max": 7086,
+            "wait": 28994,
+            "lag": 23
+          }
+        }
+      },
+      "city": {
+        "submitted": 146,
+        "completed": 146,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 38,
+            "avg": 287,
+            "max": 785,
+            "wait": 5973,
+            "lag": 55
+          },
+          "cityBuilding": {
+            "n": 80,
+            "avg": 116,
+            "max": 646,
+            "wait": 1099,
+            "lag": 47
+          },
+          "cityStreets": {
+            "n": 28,
+            "avg": 409,
+            "max": 969,
+            "wait": 2131,
+            "lag": 28
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 795,
+        "loading": 0,
+        "queued": 0,
+        "upgrading": 0,
+        "buildByTex": {
+          "64": {
+            "n": 44,
+            "avgMs": 689,
+            "maxMs": 1528,
+            "slowest": "0/2/2/2 U4096 W4451",
+            "vertexMs": 85,
+            "texelMs": 578,
+            "postMs": 26
+          },
+          "128": {
+            "n": 1037,
+            "avgMs": 599,
+            "maxMs": 2912,
+            "slowest": "0/0/0/0 U4356 W5186",
+            "vertexMs": 45,
+            "texelMs": 536,
+            "postMs": 17
+          },
+          "256": {
+            "n": 121,
+            "avgMs": 1230,
+            "maxMs": 1806,
+            "slowest": "0/18/213370/203533 U66733 W0",
+            "vertexMs": 40,
+            "texelMs": 1176,
+            "postMs": 14
+          },
+          "512": {
+            "n": 20,
+            "avgMs": 4691,
+            "maxMs": 5114,
+            "slowest": "0/17/106682/101767 U264485 W0",
+            "vertexMs": 38,
+            "texelMs": 4602,
+            "postMs": 51
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": true,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "C09",
+    "name": "验收｜建筑四面 S07 住宅侧立面（南）",
+    "file": "shots/final/C09.png",
+    "idle": true,
+    "ms": 122021,
+    "pose": {
+      "lat": 22.217717399999994,
+      "lon": 118.25513290000002,
+      "alt": 512.5299999997951,
+      "heading": 351.24,
+      "pitch": -39.99999999999999,
+      "roll": 0,
+      "fov": 35,
+      "lens": 28
+    },
+    "stats": {
+      "fps": 41.72242242278232,
+      "frame": 3265,
+      "calls": 2615,
+      "triangles": 45062119,
+      "geometries": 849,
+      "textures": 3631,
+      "programs": 103,
+      "heapMB": 866,
+      "workers": {
+        "submitted": 516,
+        "completed": 490,
+        "cancelled": 26,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "buildingTextures": {
+            "n": 29,
+            "avg": 160,
+            "max": 470,
+            "wait": 37619,
+            "lag": 101
+          },
+          "terrainTile": {
+            "n": 217,
+            "avg": 1428,
+            "max": 5632,
+            "wait": 11737,
+            "lag": 43
+          },
+          "terrainTiles": {
+            "n": 244,
+            "avg": 2342,
+            "max": 7223,
+            "wait": 30955,
+            "lag": 22
+          }
+        }
+      },
+      "city": {
+        "submitted": 140,
+        "completed": 140,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 39,
+            "avg": 273,
+            "max": 708,
+            "wait": 6062,
+            "lag": 53
+          },
+          "cityBuilding": {
+            "n": 73,
+            "avg": 168,
+            "max": 728,
+            "wait": 1173,
+            "lag": 44
+          },
+          "cityStreets": {
+            "n": 28,
+            "avg": 383,
+            "max": 780,
+            "wait": 2599,
+            "lag": 16
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 780,
+        "loading": 0,
+        "queued": 0,
+        "upgrading": 0,
+        "buildByTex": {
+          "64": {
+            "n": 44,
+            "avgMs": 703,
+            "maxMs": 1837,
+            "slowest": "0/2/2/2 U4096 W4451",
+            "vertexMs": 96,
+            "texelMs": 580,
+            "postMs": 27
+          },
+          "128": {
+            "n": 1019,
+            "avgMs": 604,
+            "maxMs": 2625,
+            "slowest": "0/0/0/0 U4356 W5186",
+            "vertexMs": 45,
+            "texelMs": 542,
+            "postMs": 18
+          },
+          "256": {
+            "n": 110,
+            "avgMs": 1274,
+            "maxMs": 1816,
+            "slowest": "0/18/213370/203536 U66733 W0",
+            "vertexMs": 41,
+            "texelMs": 1219,
+            "postMs": 15
+          },
+          "512": {
+            "n": 20,
+            "avgMs": 4722,
+            "maxMs": 5632,
+            "slowest": "0/16/53341/50886 U264821 W0",
+            "vertexMs": 39,
+            "texelMs": 4626,
+            "postMs": 57
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": true,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "C10",
+    "name": "验收｜建筑屋顶 S07 住宅",
+    "file": "shots/final/C10.png",
+    "idle": true,
+    "ms": 91327,
+    "pose": {
+      "lat": 22.2186672,
+      "lon": 118.2551965,
+      "alt": 502.8300000000745,
+      "heading": 261.24,
+      "pitch": -59.99999999999999,
+      "roll": 0,
+      "fov": 35,
+      "lens": 28
+    },
+    "stats": {
+      "fps": 46.55385308465992,
+      "frame": 2806,
+      "calls": 2136,
+      "triangles": 32392920,
+      "geometries": 753,
+      "textures": 3200,
+      "programs": 100,
+      "heapMB": 787,
+      "workers": {
+        "submitted": 429,
+        "completed": 403,
+        "cancelled": 26,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "buildingTextures": {
+            "n": 29,
+            "avg": 142,
+            "max": 440,
+            "wait": 42846,
+            "lag": 113
+          },
+          "terrainTile": {
+            "n": 166,
+            "avg": 1071,
+            "max": 4595,
+            "wait": 7337,
+            "lag": 33
+          },
+          "terrainTiles": {
+            "n": 208,
+            "avg": 2279,
+            "max": 6780,
+            "wait": 20725,
+            "lag": 22
+          }
+        }
+      },
+      "city": {
+        "submitted": 100,
+        "completed": 100,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 38,
+            "avg": 255,
+            "max": 655,
+            "wait": 6182,
+            "lag": 58
+          },
+          "cityBuilding": {
+            "n": 34,
+            "avg": 275,
+            "max": 669,
+            "wait": 988,
+            "lag": 48
+          },
+          "cityStreets": {
+            "n": 28,
+            "avg": 396,
+            "max": 934,
+            "wait": 1546,
+            "lag": 20
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 672,
+        "loading": 0,
+        "queued": 0,
+        "upgrading": 0,
+        "buildByTex": {
+          "64": {
+            "n": 44,
+            "avgMs": 735,
+            "maxMs": 1849,
+            "slowest": "0/2/2/2 U4096 W4451",
+            "vertexMs": 106,
+            "texelMs": 599,
+            "postMs": 31
+          },
+          "128": {
+            "n": 877,
+            "avgMs": 596,
+            "maxMs": 2840,
+            "slowest": "0/0/0/0 U4356 W5186",
+            "vertexMs": 44,
+            "texelMs": 535,
+            "postMs": 17
+          },
+          "256": {
+            "n": 76,
+            "avgMs": 1213,
+            "maxMs": 1636,
+            "slowest": "0/19/426742/407069 U67005 W0",
+            "vertexMs": 39,
+            "texelMs": 1160,
+            "postMs": 13
+          },
+          "512": {
+            "n": 1,
+            "avgMs": 4595,
+            "maxMs": 4595,
+            "slowest": "0/18/213367/203534 U264365 W0",
+            "vertexMs": 32,
+            "texelMs": 4523,
+            "postMs": 40
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": true,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "C11",
+    "name": "验收｜冷启动 ZR2 峡谷底上方 200 m",
+    "file": "shots/final/C11.png",
+    "idle": false,
+    "ms": 318681,
+    "pose": {
+      "lat": 34.874738,
+      "lon": -105.188219,
+      "alt": 1159.9799999999814,
+      "heading": 252.99999999999997,
+      "pitch": -8.999999999999998,
+      "roll": 0,
+      "fov": 35,
+      "lens": 35
+    },
+    "stats": {
+      "fps": 51.027802701017585,
+      "frame": 4482,
+      "calls": 6267,
+      "triangles": 112810715,
+      "geometries": 2810,
+      "textures": 7902,
+      "programs": 96,
+      "heapMB": 1049,
+      "workers": {
+        "submitted": 2234,
+        "completed": 691,
+        "cancelled": 251,
+        "failed": 0,
+        "pending": 1292,
+        "byType": {
+          "buildingTextures": {
+            "n": 29,
+            "avg": 165,
+            "max": 512,
+            "wait": 163917,
+            "lag": 379
+          },
+          "terrainTile": {
+            "n": 103,
+            "avg": 2106,
+            "max": 6177,
+            "wait": 28232,
+            "lag": 143
+          },
+          "canals": {
+            "n": 3,
+            "avg": 0,
+            "max": 1,
+            "wait": 1113,
+            "lag": 149
+          },
+          "terrainTiles": {
+            "n": 558,
+            "avg": 3646,
+            "max": 17334,
+            "wait": 93984,
+            "lag": 239
+          }
+        }
+      },
+      "city": {
+        "submitted": 848,
+        "completed": 848,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 528,
+            "avg": 299,
+            "max": 1322,
+            "wait": 40455,
+            "lag": 167
+          },
+          "cityStreets": {
+            "n": 31,
+            "avg": 591,
+            "max": 1515,
+            "wait": 4302,
+            "lag": 40
+          },
+          "cityBuilding": {
+            "n": 289,
+            "avg": 30,
+            "max": 217,
+            "wait": 2011,
+            "lag": 28
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 1715,
+        "loading": 1748,
+        "queued": 6,
+        "upgrading": 857,
+        "buildByTex": {
+          "64": {
+            "n": 44,
+            "avgMs": 994,
+            "maxMs": 3260,
+            "slowest": "1/10/339/919 U4096 W4300",
+            "vertexMs": 168,
+            "texelMs": 787,
+            "postMs": 39
+          },
+          "128": {
+            "n": 2241,
+            "avgMs": 927,
+            "maxMs": 4835,
+            "slowest": "1/9/168/460 U16384 W4404",
+            "vertexMs": 121,
+            "texelMs": 789,
+            "postMs": 18
+          },
+          "256": {
+            "n": 39,
+            "avgMs": 2942,
+            "maxMs": 6177,
+            "slowest": "1/10/333/920 U65536 W0",
+            "vertexMs": 124,
+            "texelMs": 2778,
+            "postMs": 39
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": false,
+        "clouds": true,
+        "terrain": false,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "C12",
+    "name": "验收｜G01 港池与潮堤 300 km",
+    "file": "shots/final/C12.png",
+    "idle": true,
+    "ms": 70481,
+    "pose": {
+      "lat": 0.47,
+      "lon": 129.94,
+      "alt": 300000,
+      "heading": 0,
+      "pitch": -90,
+      "roll": 0,
+      "fov": 35,
+      "lens": 35
+    },
+    "stats": {
+      "fps": 54.305682554478025,
+      "frame": 3800,
+      "calls": 483,
+      "triangles": 1272783,
+      "geometries": 610,
+      "textures": 1610,
+      "programs": 30,
+      "heapMB": 540,
+      "workers": {
+        "submitted": 259,
+        "completed": 251,
+        "cancelled": 8,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "buildingTextures": {
+            "n": 29,
+            "avg": 189,
+            "max": 606,
+            "wait": 19955,
+            "lag": 45
+          },
+          "terrainTile": {
+            "n": 90,
+            "avg": 1720,
+            "max": 3034,
+            "wait": 2989,
+            "lag": 13
+          },
+          "terrainTiles": {
+            "n": 132,
+            "avg": 2657,
+            "max": 7084,
+            "wait": 16860,
+            "lag": 1
+          }
+        }
+      },
+      "city": {
+        "submitted": 0,
+        "completed": 0,
+        "cancelled": 0,
+        "failed": 0,
+        "pending": 0,
+        "byType": {}
+      },
+      "terrain": {
+        "drawn": 408,
+        "loading": 0,
+        "queued": 0,
+        "upgrading": 0,
+        "buildByTex": {
+          "128": {
+            "n": 542,
+            "avgMs": 685,
+            "maxMs": 2575,
+            "slowest": "1/3/2/7 U16384 W0",
+            "vertexMs": 59,
+            "texelMs": 598,
+            "postMs": 28
+          },
+          "256": {
+            "n": 76,
+            "avgMs": 1764,
+            "maxMs": 3034,
+            "slowest": "0/8/235/134 U65536 W0",
+            "vertexMs": 69,
+            "texelMs": 1670,
+            "postMs": 24
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": true,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  },
+  {
+    "id": "C13",
+    "name": "验收｜G01 港城总览 420 m",
+    "file": "shots/final/C13.png",
+    "idle": false,
+    "ms": 322172,
+    "pose": {
+      "lat": 0.47,
+      "lon": 129.94,
+      "alt": 420,
+      "heading": 14,
+      "pitch": -4.000000000000012,
+      "roll": 0,
+      "fov": 35,
+      "lens": 35
+    },
+    "stats": {
+      "fps": 40.72335723943047,
+      "frame": 7515,
+      "calls": 3113,
+      "triangles": 54490834,
+      "geometries": 2184,
+      "textures": 4612,
+      "programs": 67,
+      "heapMB": 1151,
+      "workers": {
+        "submitted": 1352,
+        "completed": 566,
+        "cancelled": 38,
+        "failed": 0,
+        "pending": 748,
+        "byType": {
+          "buildingTextures": {
+            "n": 29,
+            "avg": 265,
+            "max": 1040,
+            "wait": 71513,
+            "lag": 119
+          },
+          "terrainTile": {
+            "n": 118,
+            "avg": 2596,
+            "max": 8694,
+            "wait": 7316,
+            "lag": 76
+          },
+          "terrainTiles": {
+            "n": 419,
+            "avg": 4888,
+            "max": 15213,
+            "wait": 69549,
+            "lag": 74
+          }
+        }
+      },
+      "city": {
+        "submitted": 560,
+        "completed": 559,
+        "cancelled": 1,
+        "failed": 0,
+        "pending": 0,
+        "byType": {
+          "cityTile": {
+            "n": 530,
+            "avg": 261,
+            "max": 770,
+            "wait": 14939,
+            "lag": 28
+          },
+          "cityStreets": {
+            "n": 28,
+            "avg": 0,
+            "max": 1,
+            "wait": 26,
+            "lag": 0
+          },
+          "cityBridge": {
+            "n": 1,
+            "avg": 87,
+            "max": 87,
+            "wait": 5,
+            "lag": 0
+          }
+        }
+      },
+      "terrain": {
+        "drawn": 1293,
+        "loading": 1516,
+        "queued": 4,
+        "upgrading": 370,
+        "buildByTex": {
+          "64": {
+            "n": 32,
+            "avgMs": 572,
+            "maxMs": 1863,
+            "slowest": "0/2/2/2 U4096 W4451",
+            "vertexMs": 114,
+            "texelMs": 417,
+            "postMs": 41
+          },
+          "128": {
+            "n": 1690,
+            "avgMs": 1227,
+            "maxMs": 4397,
+            "slowest": "0/3/6/6 U16384 W0",
+            "vertexMs": 163,
+            "texelMs": 1030,
+            "postMs": 33
+          },
+          "256": {
+            "n": 68,
+            "avgMs": 3803,
+            "maxMs": 8694,
+            "slowest": "0/11/1935/1046 U65536 W0",
+            "vertexMs": 152,
+            "texelMs": 3621,
+            "postMs": 31
+          }
+        }
+      },
+      "idle": {
+        "atmosphere": true,
+        "clouds": true,
+        "terrain": false,
+        "water": true,
+        "city": true,
+        "mega": true,
+        "props": true,
+        "controls": true,
+        "ui": true
+      }
+    },
+    "errors": []
+  }
+]
